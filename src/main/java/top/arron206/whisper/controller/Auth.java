@@ -57,7 +57,7 @@ public class Auth {
         }else{
             userService.encode();
             userService.save();
-            response.setStatus(200);
+            response.setStatus(201);
             return AuthMessage.getAuthMessage(
                     "注册成功", TokenManager.sign(userService.getUser().getId()), "messages /management/messages",
                     "/management/messages", "messages", "application/json");
