@@ -1,5 +1,8 @@
 package top.arron206.whisper.entity;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -42,6 +45,11 @@ public class User {
 
     @OneToMany(targetEntity = Friendship.class, mappedBy = "custom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Friendship> customFriendship;
+
+    public void md5Password() {
+        SimpleHash encodedPassword = new SimpleHash("MD5", password, ByteSource.Util.bytes(account), 3);
+        this.password = encodedPassword.toString();
+    }
 
     public int getId() {
         return id;
