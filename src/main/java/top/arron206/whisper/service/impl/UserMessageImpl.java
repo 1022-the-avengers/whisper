@@ -10,11 +10,11 @@ public class UserMessageImpl implements UserMessage {
     @Autowired
     private RedisTemplate<String, Integer> redisTemplate;
 
-    public void readMessage(String key, Object item) {
+    public void getMessage(String key, Object item) {
         redisTemplate.opsForHash().delete(key, item);
     }
 
-    public Long getMessage(String key, String item, int by) {
+    public Long addMessage(String key, String item, int by) {
         return redisTemplate.opsForHash().increment(key, item, by);
     }
 }

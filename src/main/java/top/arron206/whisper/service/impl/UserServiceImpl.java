@@ -14,13 +14,25 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Override
     public User getUser() {
         return user;
     }
 
+    @Override
     public void setUser(User user) {
         this.user = user;
         this.userInDataBase = userRepository.findByAccount(user.getAccount());
+    }
+
+    @Override
+    public User getUserInDataBase() {
+        return userInDataBase;
+    }
+
+    @Override
+    public void setUserInDataBase(User userInDataBase) {
+        this.userInDataBase = userInDataBase;
     }
 
     @Override
@@ -35,11 +47,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save() {
-        userRepository.save(user);
+        userRepository.save(this.user);
     }
 
     @Override
     public boolean isRegistered() {
        return  userInDataBase!=null;
     }
+
+    @Override
+    public User findById(int id){
+        return userRepository.findById(id);
+    }
+
+
 }

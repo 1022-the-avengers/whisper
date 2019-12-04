@@ -2,9 +2,11 @@ package top.arron206.whisper.processor;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
-import org.springframework.stereotype.Component;
 import top.arron206.whisper.pojo.MyToken;
+import top.arron206.whisper.pojo.TokenManager;
 import top.arron206.whisper.vo.AuthMessage;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@Component
 public class AuthFilter extends BasicHttpAuthenticationFilter {
+
+
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         return ((HttpServletRequest) request).getHeader("Authorization") != null;

@@ -1,6 +1,9 @@
 package top.arron206.whisper.controller;
 
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +17,7 @@ import top.arron206.whisper.pojo.TokenManager;
 import top.arron206.whisper.service.UserService;
 import top.arron206.whisper.vo.AuthMessage;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/auth")
@@ -38,7 +42,7 @@ public class Auth {
         }else{
             response.setStatus(200);
             return AuthMessage.getAuthMessage(
-                    "登录成功",TokenManager.sign(user.getId()), "messages /management/messages",
+                    "登录成功",TokenManager.sign(userService.getUserInDataBase().getId()), "messages /management/messages",
                     "/management/messages", "messages", "application/json");
         }
     }
@@ -52,7 +56,7 @@ public class Auth {
                     "/auth/registration", "registration", "application/json"));
         }else if(user.getPassword().length()<8){
             throw new HttpException(HttpStatus.FORBIDDEN, AuthMessage.getAuthMessage(
-                    "密码过短","", "registration /auth/registration",
+                    "密码长度小于八位","", "registration /auth/registration",
                     "/auth/registration", "registration", "application/json"));
         }else{
             userService.encode();

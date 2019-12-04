@@ -6,6 +6,7 @@ import java.util.Map;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 
@@ -18,6 +19,7 @@ public class TokenManager {
             Date date = new Date(System.currentTimeMillis()+EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             Map<String, Object> header = new HashMap<>(2);
+            int i = userId;
             header.put("Type", "Jwt");
             header.put("alg", "HS256");
             return JWT.create()
@@ -45,6 +47,7 @@ public class TokenManager {
     public static Integer getId(String token){
         try{
             DecodedJWT jwt = JWT.decode(token);
+            Integer t = jwt.getClaim("userId").asInt();
             return jwt.getClaim("userId").asInt();
         }catch (Exception e){
             return null;

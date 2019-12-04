@@ -26,8 +26,7 @@ public class TokenRealm extends AuthorizingRealm {
         String token = (String)authenticationToken.getCredentials();
         Integer userId = TokenManager.getId(token);
         if(userId==null)
-            userId=-1;
-        AuthenticationInfo a = new SimpleAuthenticationInfo(userId, token, getName());
+            userId=0;
         return new SimpleAuthenticationInfo(userId, token, getName());
     }
 

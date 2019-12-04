@@ -10,4 +10,7 @@ public interface UserService {
     boolean isRegistered();
     User getUser();
     void setUser(User user);
+    User findById(int id);
+    void setUserInDataBase(User userInDataBase);
+    User getUserInDataBase();
 }
