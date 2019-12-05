@@ -1,10 +1,13 @@
 package top.arron206.whisper.service.impl;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.arron206.whisper.dao.UserRepository;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.UserService;
+
+import javax.security.auth.Subject;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,6 +26,14 @@ public class UserServiceImpl implements UserService {
     public void setUser(User user) {
         this.user = user;
         this.userInDataBase = userRepository.findByAccount(user.getAccount());
+    }
+
+    @Override
+    public User setUser(){
+        org.apache.shiro.subject.Subject subject = SecurityUtils.getSubject();
+        Integer id = (Integer) subject.getPrincipal();
+        this.user = findById(id);
+        return this.user;
     }
 
     @Override

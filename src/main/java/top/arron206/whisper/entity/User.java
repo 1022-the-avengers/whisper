@@ -22,6 +22,9 @@ public class User {
     @Column(nullable = false, length = 20)
     private String nickname;
 
+    @Column()
+    private String pic;
+
     @Column(length = 2)
     private String gender;
 
@@ -65,6 +68,14 @@ public class User {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 
     public String getPassword() {
