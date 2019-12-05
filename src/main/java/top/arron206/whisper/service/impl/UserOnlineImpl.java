@@ -8,7 +8,7 @@ import top.arron206.whisper.service.UserOnline;
 @Component
 public class UserOnlineImpl implements UserOnline {
     @Autowired
-    private RedisTemplate<String, Integer> redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
 
 
     public boolean isOnline(String key, Integer userId) {

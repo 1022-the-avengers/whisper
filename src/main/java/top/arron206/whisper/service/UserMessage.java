@@ -1,6 +1,11 @@
 package top.arron206.whisper.service;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserMessage {
-    void getMessage(String key, Object item);
-    Long addMessage(String key, String item, int by);
+    void readMessage(String key, String item);
+    void addMessage(String key, Map<String, Map<String, String>> message);
+    Object getUnread(String key, String item);
+    Map<Object, Object> getAllUnread(String key);
 }
