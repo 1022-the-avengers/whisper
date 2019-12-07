@@ -26,13 +26,14 @@ public class Message {
     @RequestMapping(value = "/index", method = {RequestMethod.GET})
     public InfoMessage getIndex(){
         User user = userService.setUser();
-        Map<Object, Object> unreadMessages = userMessage.getAllUnread(String.valueOf(user.getId()));
+        Map<Object, Object> unreadMessages = userMessage.getAllUnread(user.getId());
+        Map<Object, Object> unreadNum = userMessage.getAllUnreadNum(user.getId());
         LinkMessage linkMessage = new LinkMessage(
                 "index /verification/message/index",
                 "/verification/message/index",
                 "index",
                 "application/json");
-        return new InfoMessage("获取成功", unreadMessages, new UserIndexDto(
+        return new InfoMessage("获取成功", unreadMessages, unreadNum, new UserIndexDto(
                 user.getId(), user.getNickname(), user.getPic(), user.getGender(), user.getAge()
         ), linkMessage);
     }
@@ -40,7 +41,7 @@ public class Message {
     @RequestMapping(value = "/history", method = {RequestMethod.GET})
     public HistoryMessage getHistory(@RequestParam Integer customer, @RequestParam Integer page){
         User user = userService.setUser();
-        userMessage.readMessage(String.valueOf(user.getId()), String.valueOf(customer));
+        userMessage.readMessage(user.getId(),customer);
         List<RecordDto> records = recordRepository.getChatRecord(user.getId(), customer, page);
         LinkMessage linkMessage = new LinkMessage(
                 "index /verification/message/index",
