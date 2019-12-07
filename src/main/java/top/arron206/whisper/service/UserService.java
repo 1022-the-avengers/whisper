@@ -15,4 +15,5 @@ public interface UserService {
     User findById(int id);
     void setUserInDataBase(User userInDataBase);
     User getUserInDataBase();
+//    boolean isFriend();
 }

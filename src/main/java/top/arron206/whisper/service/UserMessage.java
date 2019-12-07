@@ -1,11 +1,14 @@
 package top.arron206.whisper.service;
 
-import java.util.List;
+import top.arron206.whisper.entity.Record;
+
 import java.util.Map;
 
 public interface UserMessage {
-    void readMessage(String key, String item);
-    void addMessage(String key, Map<String, Map<String, String>> message);
-    Object getUnread(String key, String item);
-    Map<Object, Object> getAllUnread(String key);
+    void readMessage(Integer recipientId, Integer senderId);
+    void addMessage(Integer recipientId, Integer senderId, String nickname, String content, String pic);
+    Object getUnread(Integer recipientId, Integer senderId);
+    Map<Object, Object> getAllUnread(Integer recipientId);
+    Map<Object, Object> getAllUnreadNum(Integer recipientId);
+    void save(Record record);
 }

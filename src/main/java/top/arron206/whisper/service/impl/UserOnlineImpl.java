@@ -2,18 +2,18 @@ package top.arron206.whisper.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import top.arron206.whisper.service.UserOnline;
 
-@Component
+@Service
 public class UserOnlineImpl implements UserOnline {
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
 
 
-    public boolean isOnline(String key, Integer userId) {
+    public boolean isOnline(Integer userId) {
         try {
-            Boolean res = redisTemplate.opsForSet().isMember(key, userId);
+            Boolean res = redisTemplate.opsForSet().isMember("online", userId);
             if(res==null){
                 return false;
             }else{
@@ -26,9 +26,9 @@ public class UserOnlineImpl implements UserOnline {
     }
 
 
-    public long connect(String key,Integer... usersId) {
+    public long connect(Integer usersId) {
         try {
-            Long num = redisTemplate.opsForSet().add(key, usersId);
+            Long num = redisTemplate.opsForSet().add("online", usersId);
             if(num==null){
                 return 0;
             }else{
@@ -41,9 +41,9 @@ public class UserOnlineImpl implements UserOnline {
     }
 
 
-    public long disconnect(String key, Integer... values) {
+    public long disconnect(Integer values) {
         try {
-            Long count = redisTemplate.opsForSet().remove(key, values);
+            Long count = redisTemplate.opsForSet().remove("online", values);
             return count;
         } catch (Exception e) {
             e.printStackTrace();
