@@ -13,11 +13,11 @@ public class Friendship {
     @Column(nullable = false, length = 20)
     private String groupName;
 
-    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, optional=false)
+    @ManyToOne(targetEntity = User.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional=false)
     @JoinColumn(name="host_id")
     private User host;
 
-    @OneToOne(targetEntity = User.class, cascade = CascadeType.ALL, optional=false)
+    @ManyToOne(targetEntity = User.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional=false)
     @JoinColumn(name="custom_id")
     private User custom;
 

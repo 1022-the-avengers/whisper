@@ -31,22 +31,22 @@ public class User {
     @Column()
     private Integer age;
 
-    @OneToMany(targetEntity = Record.class, mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Record.class, mappedBy = "sender", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Record> senderRecords;
 
-    @OneToMany(targetEntity = Record.class, mappedBy = "recipient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Record.class, mappedBy = "recipient", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Record> recipientRecords;
 
-    @OneToMany(targetEntity = Impression.class, mappedBy = "commenter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Impression.class, mappedBy = "commenter", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Impression> commenterImpression;
 
-    @OneToMany(targetEntity = Impression.class, mappedBy = "target", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Impression.class, mappedBy = "target", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Impression> targetImpression;
 
-    @OneToMany(targetEntity = Friendship.class, mappedBy = "host", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Friendship.class, mappedBy = "host", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Friendship> hostFriendship;
 
-    @OneToMany(targetEntity = Friendship.class, mappedBy = "custom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Friendship.class, mappedBy = "custom", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Friendship> customFriendship;
 
     public void md5Password() {

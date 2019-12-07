@@ -11,20 +11,31 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String content;
 
     @Temporal(value = TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date time;
 
-    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, optional=false)
+    @ManyToOne(targetEntity = User.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional=false)
     @JoinColumn(name="sender_id")
     private User sender;
 
-    @OneToOne(targetEntity = User.class, cascade = CascadeType.ALL, optional=false)
+    @ManyToOne(targetEntity = User.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional=false)
     @JoinColumn(name="recipient_id")
     private User recipient;
+
+    public Record(){
+
+    }
+
+    public Record(String content, Date time, User sender, User recipient) {
+        this.content = content;
+        this.time = time;
+        this.sender = sender;
+        this.recipient = recipient;
+    }
 
     public int getId() {
         return id;

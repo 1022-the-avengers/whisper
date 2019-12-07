@@ -13,11 +13,11 @@ public class Impression  {
     @Column(nullable = false, length = 100)
     private String content;
 
-    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, optional=false)
+    @ManyToOne(targetEntity = User.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional=false)
     @JoinColumn(name="commenter_id")
     private User commenter;
 
-    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, optional=false)
+    @ManyToOne(targetEntity = User.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional=false)
     @JoinColumn(name="target_id")
     private User target;
 
