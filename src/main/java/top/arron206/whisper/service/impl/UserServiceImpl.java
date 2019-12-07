@@ -7,8 +7,6 @@ import top.arron206.whisper.dao.UserRepository;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.UserService;
 
-import javax.security.auth.Subject;
-
 @Service
 public class UserServiceImpl implements UserService {
     private User user;
