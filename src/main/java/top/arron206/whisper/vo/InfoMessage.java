@@ -8,6 +8,7 @@ import java.util.Map;
 public class InfoMessage {
     private String message;
     private Map<Object, Object> unreadMessages;
+    private Map<Object, Object> unreadNum;
     private UserIndexDto userMessage;
     private Map<String, String> link = new LinkedHashMap<>();
 
@@ -15,9 +16,10 @@ public class InfoMessage {
 
     }
 
-    public InfoMessage(String message, Map<Object, Object> unreadMessages, UserIndexDto userMessage, LinkMessage linkMessage) {
+    public InfoMessage(String message, Map<Object, Object> unreadMessages, Map<Object, Object> unreadNum, UserIndexDto userMessage, LinkMessage linkMessage) {
         this.message = message;
         this.unreadMessages = unreadMessages;
+        this.unreadNum = unreadNum;
         this.userMessage = userMessage;
         this.link = linkMessage.getLink();
     }
@@ -52,5 +54,13 @@ public class InfoMessage {
 
     public void setLink(Map<String, String> link) {
         this.link = link;
+    }
+
+    public Map<Object, Object> getUnreadNum() {
+        return unreadNum;
+    }
+
+    public void setUnreadNum(Map<Object, Object> unreadNum) {
+        this.unreadNum = unreadNum;
     }
 }
