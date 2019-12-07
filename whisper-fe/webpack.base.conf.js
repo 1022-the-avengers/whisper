@@ -22,6 +22,10 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
+        test: /\.sass$/,
+        loaders: ['style', 'css', 'sass']
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
