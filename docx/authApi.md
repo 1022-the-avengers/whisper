@@ -1,5 +1,6 @@
 # auth模块接口
 ### 登录
+* url: /auth/login
 * 请求方法: post
 * 参数
 ```
@@ -49,6 +50,7 @@
     }
     ```
 ### 注册
+* url: /auth/registration
 * 请求方法: post
 * 参数
 ```

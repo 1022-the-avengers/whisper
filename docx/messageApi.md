@@ -1,6 +1,7 @@
 # message模块接口
 
 ### 主页(也就是消息盒子)获取未读信息
+* url: /verification/message/index
 * 请求方法: get
 * headers
 ```
@@ -16,18 +17,21 @@ Authorization: "Bearer "+token
     {
         "message": "获取成功",
         "unreadMessages": {
-            "4": {                         // 4为未读消息发送者的id
-                "nickname": "臭弟弟",      //未读消息中消息发送者昵称
-                "pic": "asdfsadfsadf",    //未读消息中消息发送者的头像 base64
-                "content": "沃日"          //未读消息内容
+            "4": {
+                "nickname": "臭弟弟",
+                "pic": null,
+                "content": "日尼玛"
             }
         },
-        "userMessage": {                //userMessage 为用户信息
-            "id": 3,                    //用户id
-            "nickname": "Marron",       //用户昵称
-            "pic": null,                //用户头像
-            "gender": null,             //用户性别
-            "age": null                 //用户年龄
+        "unreadNum": {
+            "4": 1
+        },
+        "userMessage": {
+            "id": 3,
+            "nickname": "Marron",
+            "pic": null,
+            "gender": null,
+            "age": null
         },
         "link": {
             "rel": "index /verification/message/index",
@@ -52,6 +56,7 @@ Authorization: "Bearer "+token
   ```
   
 ### 和B的聊天记录
+* url: /verification/message/history
 * 请求方法: get
 * headers
 ```
@@ -67,12 +72,42 @@ page: 第几页，一页默认返回15条
     ```
     {
         "message": "获取成功",
-        "historyMessage": [             //历史消息，按照时间近远排序
+        "historyMessage": [
             {
-                "content": "沃日",        //消息内容
-                "time": "2019-12-05T03:54:43.000+0000",     //消息发送时间
-                "senderId": 4,                          //消息发送者id
-                "recipientId": 3                        //消息接受者id
+                "content": "日尼玛",
+                "time": "2019-12-07T03:05:41.257+0000",
+                "senderId": 4,
+                "recipientId": 3
+            },
+            {
+                "content": "日尼玛",
+                "time": "2019-12-07T03:04:21.479+0000",
+                "senderId": 4,
+                "recipientId": 3
+            },
+            {
+                "content": "沃日",
+                "time": "2019-12-07T03:04:05.107+0000",
+                "senderId": 3,
+                "recipientId": 4
+            },
+            {
+                "content": "沃日",
+                "time": "2019-12-07T03:02:46.515+0000",
+                "senderId": 3,
+                "recipientId": 4
+            },
+            {
+                "content": "说话啊",
+                "time": "2019-12-07T01:15:43.115+0000",
+                "senderId": 3,
+                "recipientId": 4
+            },
+            {
+                "content": "沃日",
+                "time": "2019-12-07T01:15:08.746+0000",
+                "senderId": 3,
+                "recipientId": 4
             }
         ],
         "link": {
