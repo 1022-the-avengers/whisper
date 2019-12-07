@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    I am App.vue的聊天系统
+    <router-view></router-view>
   </div>
 </template>
 
