@@ -2,12 +2,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.[hash].js',
-    path: path.join(__dirname, '/dist')  //打包生成文件地址
+    path: path.join(__dirname, '/dist'),  //打包生成文件地址
   },
   module: {
     rules: [
@@ -36,11 +37,10 @@ module.exports = {
         }
       },
       {
-        test: /\.(jpg|png|gif|svg)$/,
-        use: 'url-loader',
-        include: path.resolve(__dirname + '/src/'),
-        exclude: /node_modules/ 
-      },
+        test: /\.(png|gif|jpg|jpeg|svg)$/,     //处理图片
+        exclude: /node_modules/,
+        loader: 'url-loader?limit=8192&name=img/[hash:8].[name].[ext]'
+      }, 
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
@@ -56,6 +56,13 @@ module.exports = {
     }),
     new CleanWebpackPlugin({
       cleanAfterEveryBuildPatterns: ['./dist']
+    }),
+    new CopyWebpackPlugin([{
+      from: './src/assets/images',
+      to: './assets'
+    }], {
+      ignore: [],
+      copyUnmodified: true
     }),
     new VueLoaderPlugin()
   ]
