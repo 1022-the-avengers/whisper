@@ -30,6 +30,19 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.(jpg|png|gif|svg)$/,
+        use: 'url-loader',
+        include: path.resolve(__dirname + '/src/'),
+        exclude: /node_modules/ 
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        }
       }
     ]
   },
