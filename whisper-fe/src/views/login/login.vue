@@ -7,7 +7,7 @@
       <span class="Msg">{{Msg}}</span>
     </mt-popup>
     <form class="login_form">
-      <!-- <img class="login_image" src="../../assets/images/login.png" /> -->
+      <img class="login_image" src="/assets/logo.png"/>
       <div class="content">
         <label class="account_number">
           <i class="iconfont">&#xe62a;</i>
@@ -82,13 +82,10 @@ export default {
         }, 500);
       }
     }
-  },
-  mounted() {
-    console.log("i am login mounted123")
-  },
+  }
 };
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+  @import './login.scss'
 </style>
