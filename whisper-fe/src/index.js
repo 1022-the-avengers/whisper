@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 Vue.prototype.axios = axios
-axios.defaults.baseURL = 'http://192.168.1.105' // 本地测试
+axios.defaults.baseURL = 'http://192.168.1.105:8080' // 本地测试
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
