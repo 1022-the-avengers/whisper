@@ -1,0 +1,111 @@
+.register {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: #292421;
+}
+
+.header {
+  display: block;
+  width: 80vw;
+  padding-top: 11vw;
+  margin: 0 auto;
+
+  span {
+    font-size: 25px;
+    color: #242921;
+  }
+}
+
+.register_form {
+  position: relative;
+  width: 80vw;
+  margin: 20px auto 0 auto;
+
+  .register_image {
+    display: block;
+    width: 80vw;
+    margin: 0 auto 20px auto;
+  }
+
+  .content {
+    position: relative;
+
+    input {
+      width: 70vw;
+      height: 60px;
+      padding-left: 10vw;
+      border-bottom: 1px solid rgb(176, 176, 176);
+      border-top: 0px;
+      border-left: 0px;
+      border-right: 0px;
+      font-size: 18px;
+      line-height: 60px;
+      outline: none;
+    }
+
+    .iconfont {
+      font-size: 25px;
+      color: #595959;
+    }
+  }
+
+  .account_number {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    line-height: 60px;
+    height: 60px;
+
+    i {
+      position: absolute;
+    }
+  }
+
+  .account_name {
+    display: flex;
+    flex-direction: row;
+    line-height: 60px;
+    height: 60px;
+    padding-bottom: 3px;
+
+    i {
+      position: absolute;
+    }
+  }
+
+  .account_password {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    line-height: 60px;
+
+    i {
+      position: absolute;
+    }
+  }
+
+
+  .btn_verify {
+    position: absolute;
+    right: 0;
+    font-size: 18px;
+  }
+
+  .btn_register {
+    width: 80vw;
+    height: 12.5vw;
+    margin-top: 38px;
+    margin-bottom: 11px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgb(220, 220, 220);
+    font-size: 16px;
+    background: #595959;
+    color: white;
+  }
+}
