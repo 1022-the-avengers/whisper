@@ -57,12 +57,12 @@ export default {
   methods: {
     login() {
       if (this.isEmail(this.email)) {
-        let postData = { email: this.email, password: this.password };
+        let postData = { account: this.email, password: this.password };
         this.axios
-          .post("/api/user/login", postData)
+          .post("/auth/login", postData)
           .then(this.todoSomething)
           .catch(err => {
-            console.log("denglushibai", err);
+            console.log("登录失败err: ", err);
             this.Msg = "登录失败";
             this.Popup();
           });
@@ -74,10 +74,10 @@ export default {
     todoSomething(res) {
       this.Msg = res.data.message;
       this.visible = true;
-      if (res.data.status) {
+      if (res) {
         setTimeout(() => {
-          localStorage.setItem("shixianEmail", this.email);
-          localStorage.setItem("jwtToken", res.data.data.token);
+          localStorage.setItem("chatEmail", this.email);
+          localStorage.setItem("chatToken", res.data.token);
           this.$router.push({ path: "/" });
         }, 500);
       }
