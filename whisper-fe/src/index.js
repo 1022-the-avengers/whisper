@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 Vue.prototype.axios = axios
-axios.defaults.baseURL = 'http://192.168.1.105:8080' // 本地测试
+// axios.defaults.baseURL = 'http://192.168.1.105:8080' // 本地测试
+axios.defaults.baseURL = 'http://127.0.0.1:8080'
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
@@ -12,12 +13,15 @@ import './assets/iconfont/iconfont.css'
 
 axios.interceptors.request.use(config => {
   // console.log("request config:  ", config)
+  const token = localStorage.getItem("chatToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   return config
 }, err => {
   this.$store.state.data = '请求超时！'
   this.Popup(this.$store.state.data)
   return Promise.resolve(err)
-  console.log(this.$store.state.data)
 })
 axios.interceptors.response.use(respone => {
   // console.log("respone :", respone)

@@ -35,8 +35,8 @@
         </label>
         <div class="user_nav">
           <button type="button" class="btn_login" @click="login">登录</button>
-          <router-link to="/User/register" class="register">注册</router-link>
-          <router-link to="/User/modifyPassword" class="forget">忘记密码</router-link>
+          <router-link to="/register" class="register">注册</router-link>
+          <router-link to="/modifyPassword" class="forget">忘记密码</router-link>
         </div>
       </div>
     </form>
