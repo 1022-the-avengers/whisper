@@ -13,6 +13,10 @@ import './assets/iconfont/iconfont.css'
 
 axios.interceptors.request.use(config => {
   // console.log("request config:  ", config)
+  const token = localStorage.getItem("chatToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   return config
 }, err => {
   this.$store.state.data = '请求超时！'
