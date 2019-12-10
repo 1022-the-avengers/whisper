@@ -1,6 +1,5 @@
 package top.arron206.whisper.pojo;
 
-import jdk.nashorn.internal.parser.Token;
 import org.apache.shiro.authc.AuthenticationToken;
 
 public class MyToken implements AuthenticationToken {
