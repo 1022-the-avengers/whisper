@@ -47,12 +47,13 @@ public class Socket {
         if(relationshipService.isFriend(recipient, sender)){
             Record record = new Record(content, new Date(), sender, recipient);
             userMessage.save(record);
-            if(userOnline.isOnline(recipient.getId()))
+            userMessage.addMessage(recipient.getId(), sender.getId(), sender.getNickname(), content, sender.getPic());
+//            if(userOnline.isOnline(recipient.getId()))
                 messagingTemplate.convertAndSend(destination, new HashMap<String, String>(){{
                     put("content", content);
                 }});
-            else
-                userMessage.addMessage(recipient.getId(), sender.getId(), sender.getNickname(), content, sender.getPic());
+//            else
+//                userMessage.addMessage(recipient.getId(), sender.getId(), sender.getNickname(), content, sender.getPic());
             messagingTemplate.convertAndSend(origin, new HashMap<String, String>(){{
                 put("content","发送成功");
             }});
