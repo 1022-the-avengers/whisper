@@ -80,11 +80,9 @@ export default {
             .post("/auth/registration", postData)
             .then(this.todoSomething)
             .catch(err => {
-              console.log("error", err);
+              console.log("error: ", err.response.status);
                 this.Msg = '密码少于8位或账号已注册';
                 this.Popup();
-              // this.Msg = '你是403';
-              // this.Popup();
             });
         } else {
           this.Msg = "密码不能为空";

@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 Vue.prototype.axios = axios
-axios.defaults.baseURL = 'http://192.168.1.105:8080' // 本地测试
+// axios.defaults.baseURL = 'http://192.168.1.105:8080' // 本地测试
+axios.defaults.baseURL = 'http://192.168.1.106:8080'
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
@@ -17,7 +18,6 @@ axios.interceptors.request.use(config => {
   this.$store.state.data = '请求超时！'
   this.Popup(this.$store.state.data)
   return Promise.resolve(err)
-  console.log(this.$store.state.data)
 })
 axios.interceptors.response.use(respone => {
   // console.log("respone :", respone)
