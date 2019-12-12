@@ -50,6 +50,9 @@ public class Socket {
             userMessage.addMessage(recipient.getId(), sender.getId(), sender.getNickname(), content, sender.getPic());
 //            if(userOnline.isOnline(recipient.getId()))
                 messagingTemplate.convertAndSend(destination, new HashMap<String, String>(){{
+                    put("senderId", String.valueOf(sender.getId()));
+                    put("senderPic", sender.getPic());
+                    put("senderName", sender.getNickname());
                     put("content", content);
                 }});
 //            else
