@@ -29,7 +29,7 @@
     position: fixed;
     top: 50px;
     bottom: 55px;
-    overflow: scroll;
+    overflow-y: scroll;
     flex: 1;
     width: 100%;
     background: #F1F2F7;
@@ -37,13 +37,29 @@
     .msg {
       width: 70%;
       position: relative;
+      overflow: scroll;
     }
 
     .content_item {
       display: flex;
       justify-content: flex-end;
       text-align: right;
+      margin-top: 10px;
 
+      .info {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #1FBAFC;
+        box-shadow: 0 0 2px #1FBAFD;
+        border-radius: 15px;
+      }
+    }
+
+    .content_response {
+      display: flex;
+      justify-content: flex-start;
+      text-align: left;
+      margin-top: 10px;
       .info {
         display: inline-block;
         padding: 10px 15px;
@@ -84,7 +100,8 @@
       border-radius: 20px;
       border: none;
       background: #1FBAFC;
-      color: #ffffff
+      color: #ffffff;
+      outline: none;
     }
   }
 
