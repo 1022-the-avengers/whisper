@@ -29,7 +29,7 @@
         }
         ```
 1. ### 获取好友印象
-    * url: /user/information
+    * url: /user/impression
     * 请求方法: get
     * 参数
     ```

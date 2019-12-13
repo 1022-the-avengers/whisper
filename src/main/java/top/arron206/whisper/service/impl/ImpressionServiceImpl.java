@@ -20,10 +20,8 @@ public class ImpressionServiceImpl implements ImpressionService {
     UserRepository userRepository;
 
     public void saveImpression(ImpressionMessage impressionMessage) {
-        User commenter = new User();
-        commenter.setId(impressionMessage.getCommenterId());
-        User target = new User();
-        target.setId(impressionMessage.getTargetId());
+        User commenter = new User(impressionMessage.getCommenterId());
+        User target = new User(impressionMessage.getTargetId());
         List<Impression> preImpressions = this.impressionRepository.findByCommenterAndTarget(commenter, target);
         this.impressionRepository.deleteAll(preImpressions);
         for (String content : impressionMessage.getContents()) {

@@ -21,6 +21,14 @@ public class Friendship {
     @JoinColumn(name="custom_id")
     private User custom;
 
+    public Friendship() { }
+
+    public Friendship(String groupName, User host, User custom) {
+        this.groupName = groupName;
+        this.host = host;
+        this.custom = custom;
+    }
+
     public int getId() {
         return id;
     }

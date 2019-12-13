@@ -49,6 +49,12 @@ public class User {
     @OneToMany(targetEntity = Friendship.class, mappedBy = "custom", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Friendship> customFriendship;
 
+    public User() { }
+
+    public User(int id) {
+        this.id = id;
+    }
+
     public void md5Password() {
         SimpleHash encodedPassword = new SimpleHash("MD5", password, ByteSource.Util.bytes(account), 3);
         this.password = encodedPassword.toString();
