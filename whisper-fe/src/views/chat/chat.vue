@@ -2,17 +2,19 @@
   <div class="container">
     <div class="header">这是哈士奇</div>
     <div class="content">
-      <div class="content_item" v-for="(item, index) in myMessage" :key="index">
-        <div class="msg">
-          <span class="info">{{item}}</span>
+      <div v-for="(item, index) in Messages" :key="index">
+        <div class="content_item" v-if="item.my">
+          <div class="msg">
+            <span class="info">{{item.my}}</span>
+          </div>
+          <img class="avator" alt="你的头像" src="http://img.flura.cn/myAvatar.jpg" />
         </div>
-        <img class="avator" alt="你的头像" src="http://img.flura.cn/myAvatar.jpg" />
-      </div>
 
-      <div class="content_response" v-for="(item, index) in hisMessage" :key="item">
-        <img class="avator" alt="他的头像" src="http://img.flura.cn/robot.jpg" />
-        <div class="msg">
-          <span class="info">{{item}}</span>
+        <div class="content_response" v-else>
+          <img class="avator" alt="他的头像" src="http://img.flura.cn/robot.jpg" />
+          <div class="msg">
+            <span class="info">{{item.he}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -29,35 +31,64 @@ export default {
   data() {
     return {
       inputMessage: "",
-      myMessage: ["这是发给某人的一条消息", "这是另一个"],
-      hisMessage: ["这是别人的消息....123234234234235"]
+      Messages: [{ my: "这是发给某人的一条消息" }, { my: "这是另一个" }]
     };
   },
   methods: {
+    initWebSocket() {
+      this.connection();
+      let self = this;
+      // 断开重连机制,尝试发送消息,捕获异常发生时重连
+      this.timer = setInterval(() => {
+        try {
+          self.stompClient.send("test");
+        } catch (err) {
+          console.log("断线了: " + err);
+          self.connection();
+        }
+      }, 5000);
+    },
     sendMessage() {
       console.log("发送");
       if (this.inputMessage) {
-        this.myMessage.push(this.inputMessage);
+        this.Messages.push({ my: this.inputMessage });
+
+        this.stompClient.send(
+          "/socket/chat",
+          {},
+          JSON.stringify({
+            content: this.inputMessage,
+            senderId: 3,
+            recipientId: 4
+          })
+        );
+        console.log("inputMessage: ", this.inputMessage);
         this.inputMessage = "";
       }
     },
     connection() {
       // 建立连接对象
-      this.scoket = new this.SockJS("http://10.242.2.101:8080/chat"); //连接服务端提供的通信接口，连接以后才可以订阅广播消息和个人消息
+      let scoket = new this.SockJS("http://192.168.1.105:8080/chat"); //连接服务端提供的通信接口，连接以后才可以订阅广播消息和个人消息
       // 获取STOMP子协议的客户端对象
-      this.stompClient = this.Stomp.over(this.socket);
+      this.stompClient = this.Stomp.over(scoket);
       // 定义客户端的认证信息,按需求配置
       var headers = {
         // additional header
-        "userId": "3"
+        userId: 3
       };
       // 向服务器发起websocket连接
       this.stompClient.connect(
         headers,
         frame => {
           this.stompClient.subscribe("/subscription/3", msg => {
-            // 订阅服务端提供的某个topic
-            consolel.log(msg.body); // msg.body存放的是服务端发送给我们的信息
+            console.log("返回信息: ", msg);
+            if (
+              JSON.parse(msg.body).content !== "发送成功" &&
+              JSON.parse(msg.body).content !== undefined
+            ) {
+              this.Messages.push({ he: JSON.parse(msg.body).content });
+            }
+            // 订阅服务端提供的某个topic  // msg.body存放的是服务端发送给我们的信息
           });
         },
         err => {
@@ -71,19 +102,6 @@ export default {
         this.stompClient.disconnect();
         console.log("Disconnected");
       }
-    },
-    initWebSocket() {
-      this.connection();
-      let self = this;
-      // 断开重连机制,尝试发送消息,捕获异常发生时重连
-      this.timer = setInterval(() => {
-        try {
-          self.stompClient.send("test");
-        } catch (err) {
-          console.log("断线了: " + err);
-          self.connection();
-        }
-      }, 5000);
     }
   },
   mounted() {
