@@ -9,7 +9,7 @@
         <img class="avator" alt="你的头像" src="http://img.flura.cn/myAvatar.jpg" />
       </div>
 
-      <div class="content_response" v-for="(item, index) in hisMessage" :key="index">
+      <div class="content_response" v-for="(item, index) in hisMessage" :key="item">
         <img class="avator" alt="他的头像" src="http://img.flura.cn/robot.jpg" />
         <div class="msg">
           <span class="info">{{item}}</span>
@@ -43,21 +43,19 @@ export default {
     },
     connection() {
       // 建立连接对象
-      this.scoket = new this.SockJS("http://10.242.2.101:8089/ws"); //连接服务端提供的通信接口，连接以后才可以订阅广播消息和个人消息
+      this.scoket = new this.SockJS("http://10.242.2.101:8080/chat"); //连接服务端提供的通信接口，连接以后才可以订阅广播消息和个人消息
       // 获取STOMP子协议的客户端对象
       this.stompClient = this.Stomp.over(this.socket);
       // 定义客户端的认证信息,按需求配置
       var headers = {
-        login: "mylogin",
-        passcode: "mypasscode",
         // additional header
-        "client-id": "my-client-id"
+        "userId": "3"
       };
       // 向服务器发起websocket连接
       this.stompClient.connect(
         headers,
         frame => {
-          this.stompClient.subscribe("/subscription/当前userId", msg => {
+          this.stompClient.subscribe("/subscription/3", msg => {
             // 订阅服务端提供的某个topic
             consolel.log(msg.body); // msg.body存放的是服务端发送给我们的信息
           });
