@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div class="header">这是哈士奇</div>
+    <div class="header">
+      <span @click="goBack" class="iconfont">&#xe61b;</span>
+      这是哈士奇
+    </div>
     <div class="content">
       <div v-for="(item, index) in Messages" :key="index">
         <div class="content_item" v-if="item.my">
@@ -57,7 +60,7 @@ export default {
           "/socket/chat",
           {},
           JSON.stringify({
-            content: {my: this.inputMessage},
+            content: { my: this.inputMessage },
             senderId: 3,
             recipientId: 4
           })
@@ -82,7 +85,7 @@ export default {
         frame => {
           this.stompClient.subscribe("/subscription/3", msg => {
             console.log("返回信息: ", msg);
-            console.log(JSON.parse(msg.body))
+            console.log(JSON.parse(msg.body));
             if (
               JSON.parse(msg.body).content.he !== "发送成功" &&
               JSON.parse(msg.body).content.he !== undefined
@@ -103,6 +106,9 @@ export default {
         this.stompClient.disconnect();
         console.log("Disconnected");
       }
+    },
+    goBack() {
+      this.$router.go(-1);
     }
   },
   mounted() {
