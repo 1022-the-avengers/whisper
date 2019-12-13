@@ -57,7 +57,7 @@ export default {
           "/socket/chat",
           {},
           JSON.stringify({
-            content: this.inputMessage,
+            content: {my: this.inputMessage},
             senderId: 3,
             recipientId: 4
           })
@@ -82,11 +82,12 @@ export default {
         frame => {
           this.stompClient.subscribe("/subscription/3", msg => {
             console.log("返回信息: ", msg);
+            console.log(JSON.parse(msg.body))
             if (
-              JSON.parse(msg.body).content !== "发送成功" &&
-              JSON.parse(msg.body).content !== undefined
+              JSON.parse(msg.body).content.he !== "发送成功" &&
+              JSON.parse(msg.body).content.he !== undefined
             ) {
-              this.Messages.push({ he: JSON.parse(msg.body).content });
+              this.Messages.push(JSON.parse(msg.body).content);
             }
             // 订阅服务端提供的某个topic  // msg.body存放的是服务端发送给我们的信息
           });
