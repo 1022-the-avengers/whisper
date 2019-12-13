@@ -2,6 +2,7 @@ package top.arron206.whisper.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import top.arron206.whisper.dto.UserInformation;
 import top.arron206.whisper.service.RelationshipService;
 import top.arron206.whisper.vo.GeneralResponse;
 import top.arron206.whisper.vo.RelationshipMessage;
@@ -38,7 +39,7 @@ public class RelationController {
 
     @RequestMapping(value = "/relationship", method = RequestMethod.GET)
     public GeneralResponse getRelationship(@RequestParam("hostId") int hostId) {
-        Map<String, List<Integer>> relationships = this.relationshipService.getRelationShips(hostId);
+        Map<String, List<UserInformation>> relationships = this.relationshipService.getRelationShips(hostId);
         return new GeneralResponse("好友列表获取成功", relationships,
                 "",
                 "",

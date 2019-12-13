@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.arron206.whisper.dao.FriendshipRepository;
 import top.arron206.whisper.dao.UserRepository;
+import top.arron206.whisper.dto.UserInformation;
 import top.arron206.whisper.entity.Friendship;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.RelationshipService;
@@ -42,15 +43,18 @@ public class RelationshipServiceImpl implements RelationshipService {
         this.friendshipRepository.delete(friendshipInDB);
     }
 
-    public Map<String, List<Integer>> getRelationShips(int hostId) {
+    public Map<String, List<UserInformation>> getRelationShips(int hostId) {
         User host = this.userRepository.findById(hostId);
         List<Friendship> friendships = host.getHostFriendship();
-        Map<String, List<Integer>> relations = new LinkedHashMap<>();
+        Map<String, List<UserInformation>> relations = new LinkedHashMap<>();
         for (Friendship friendship : friendships) {
             String groupName = friendship.getGroupName();
             if (!relations.containsKey(groupName))
-                relations.put(groupName, new ArrayList<Integer>());
-            relations.get(groupName).add(friendship.getCustom().getId());
+                relations.put(groupName, new ArrayList<UserInformation>());
+            User user = this.userRepository.findById(friendship.getCustom().getId());
+            UserInformation userInformation = new UserInformation(user.getId(), user.getNickname(),
+                    user.getPic(), user.getGender(), user.getAge());
+            relations.get(groupName).add(userInformation);
         }
         return relations;
     }

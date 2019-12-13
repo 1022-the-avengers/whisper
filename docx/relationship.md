@@ -60,11 +60,29 @@
             "message": "好友印象列表获取成功",
             "data": {
                 "高中": [
-                    5,
-                    6
+                    {
+                        "id": 5,
+                        "nickname": "Marron",
+                        "pic": null,
+                        "gender": "男",
+                        "age": 38
+                    },
+                    {
+                        "id": 6,
+                        "nickname": "康王",
+                        "pic": null,
+                        "gender": null,
+                        "age": 45
+                    }
                 ],
                 "小学": [
-                    4
+                    {
+                        "id": 4,
+                        "nickname": "Marron",
+                        "pic": "sdfdsfdf",
+                        "gender": "女",
+                        "age": 18
+                    }
                 ]
             },
             "link": {
