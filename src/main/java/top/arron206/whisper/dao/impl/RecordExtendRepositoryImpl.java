@@ -21,7 +21,12 @@ public class RecordExtendRepositoryImpl implements RecordExtendRepository {
     @Override
     public List<RecordDto> getChatRecord(int host, int customer, int page) {
         int offset = (page-1)*15;
-        String sql = "SELECT * FROM record WHERE (sender_id=? and recipient_id=?) or (sender_id=? and recipient_id=?) order by time desc limit ?,15";
+        String sql;
+        if(page!=-1) {
+            sql = "SELECT * FROM record WHERE (sender_id=? and recipient_id=?) or (sender_id=? and recipient_id=?) order by time desc limit ?,15";
+        }else{
+            sql = "SELECT * FROM record WHERE (sender_id=? and recipient_id=?) or (sender_id=? and recipient_id=?) order by time desc";
+        }
         BeanPropertyRowMapper<RecordDto> rm = BeanPropertyRowMapper.newInstance(RecordDto.class);
         return jdbcTemplate.query(sql, rm, host, customer, customer, host, offset);
     }
