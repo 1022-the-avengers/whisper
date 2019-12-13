@@ -13,6 +13,9 @@ public class UserInformationServiceImpl implements UserInformationService {
     UserRepository userRepository;
 
     public void saveUserInformation(User user) {
+        User realUser = this.userRepository.findById(user.getId());
+        user.setAccount(realUser.getAccount());
+        user.setPassword(realUser.getPassword());
         this.userRepository.save(user);
     }
 
