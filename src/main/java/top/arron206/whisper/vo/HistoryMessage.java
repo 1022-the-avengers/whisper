@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class HistoryMessage {
     private String message;
-    private List<RecordDto> historyMessage;
+    private List<ChatMessage> historyMessage;
     private Map<String, String> link = new LinkedHashMap<>();
 
-    public HistoryMessage(String message, List<RecordDto> historyMessage, LinkMessage linkMessage) {
+    public HistoryMessage(String message, List<ChatMessage> historyMessage, LinkMessage linkMessage) {
         this.message = message;
         this.historyMessage = historyMessage;
         this.link = linkMessage.getLink();
@@ -29,11 +29,11 @@ public class HistoryMessage {
         this.message = message;
     }
 
-    public List<RecordDto> getHistoryMessage() {
+    public List<ChatMessage> getHistoryMessage() {
         return historyMessage;
     }
 
-    public void setHistoryMessage(List<RecordDto> historyMessage) {
+    public void setHistoryMessage(List<ChatMessage> historyMessage) {
         this.historyMessage = historyMessage;
     }
 

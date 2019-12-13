@@ -41,19 +41,22 @@ public class Socket {
         User recipient = userService.findById(message.getRecipientId());
         if(sender==null||recipient==null)
             return;
-        String content = message.getContent();
+        Map<String, String> content = message.getContent();;
         String destination = "/subscription/" + recipient.getId();
         String origin = "/subscription/" + sender.getId();
         if(relationshipService.isFriend(recipient, sender)){
-            Record record = new Record(content, new Date(), sender, recipient);
+            Record record = new Record(content.get("my"), new Date(), sender, recipient);
             userMessage.save(record);
-            userMessage.addMessage(recipient.getId(), sender.getId(), sender.getNickname(), content, sender.getPic());
+            userMessage.addMessage(recipient.getId(), sender.getId(), sender.getNickname(), content.get("my"), sender.getPic());
 //            if(userOnline.isOnline(recipient.getId()))
-                messagingTemplate.convertAndSend(destination, new HashMap<String, String>(){{
+                messagingTemplate.convertAndSend(destination, new HashMap<String, Object>(){{
                     put("senderId", String.valueOf(sender.getId()));
                     put("senderPic", sender.getPic());
                     put("senderName", sender.getNickname());
-                    put("content", content);
+                    put("content", new HashMap<String, String>(){{
+                        put("he", content.get("my"));
+                            }}
+                            );
                 }});
 //            else
 //                userMessage.addMessage(recipient.getId(), sender.getId(), sender.getNickname(), content, sender.getPic());

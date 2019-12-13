@@ -1,6 +1,7 @@
 package top.arron206.whisper.service;
 
 import org.springframework.stereotype.Service;
+import top.arron206.whisper.dto.UserInformation;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.vo.RelationshipMessage;
 
@@ -15,5 +16,5 @@ public interface RelationshipService {
 
     void deleteRelationShip(int hostId, int customId);
 
-    Map<String, List<Integer>> getRelationShips(int hostId);
+    Map<String, List<UserInformation>> getRelationShips(int hostId);
 }

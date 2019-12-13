@@ -1,12 +1,15 @@
 package top.arron206.whisper.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import top.arron206.whisper.dao.RecordRepository;
 import top.arron206.whisper.dto.*;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.*;
 import top.arron206.whisper.vo.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,11 +46,27 @@ public class Message {
         User user = userService.setUser();
         userMessage.readMessage(user.getId(),customer);
         List<RecordDto> records = recordRepository.getChatRecord(user.getId(), customer, page);
+        List<ChatMessage> chatMessages = new ArrayList<>();
+        for(RecordDto recordDto : records){
+            chatMessages.add(new ChatMessage(recordDto, recordDto.getSenderId()==user.getId()));
+        }
         LinkMessage linkMessage = new LinkMessage(
                 "index /verification/message/index",
                 "/verification/message/index",
                 "index",
                 "application/json");
-        return new HistoryMessage("获取成功", records, linkMessage);
+        return new HistoryMessage("获取成功", chatMessages, linkMessage);
+    }
+
+    @RequestMapping(value = "/history", method = {RequestMethod.PUT})
+    public StatusMessage readMessage(@RequestParam Integer customer){
+        User user = userService.setUser();
+        userMessage.readMessage(user.getId(), customer);
+        LinkMessage linkMessage = new LinkMessage(
+                "index /verification/message/index",
+                "/verification/message/index",
+                "index",
+                "application/json");
+        return new StatusMessage("读取成功", linkMessage);
     }
 }
