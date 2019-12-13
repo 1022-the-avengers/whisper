@@ -10,7 +10,7 @@ import top.arron206.whisper.vo.ImpressionMessage;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/verification/user")
 public class ImpressionController {
     @Autowired
     ImpressionService impressionService;

@@ -7,8 +7,10 @@ import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.UserInformationService;
 import top.arron206.whisper.vo.GeneralResponse;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/verification/user")
 public class InformationController {
     @Autowired
     UserInformationService userInformationService;
@@ -31,5 +33,18 @@ public class InformationController {
                     "",
                     "",
                     "");
+    }
+
+    @RequestMapping(value = "/informations", method = RequestMethod.GET)
+    public GeneralResponse getInformation(@RequestParam(name = "nickname", required = false) String nickname,
+                                          @RequestParam(name = "gender", required = false) String gender,
+                                          @RequestParam(name = "minAge", required = false) int minAge,
+                                          @RequestParam(name = "maxAge", required = false) int maxAge) {
+        List<UserInformation> userInformations =  userInformationService.getUserInformations(nickname, gender, minAge, maxAge);
+        return new GeneralResponse("用户资料请求成功", userInformations,
+                "",
+                "",
+                "",
+                "");
     }
 }

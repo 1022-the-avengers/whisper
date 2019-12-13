@@ -1,6 +1,6 @@
 # impression接口
 1. ### 更新好友关系
-    * url: /user/relationship
+    * url: /verification/user/relationship
     * 请求方法: post
     * 参数
     ```
@@ -25,7 +25,7 @@
         }
         ```
 2. ### 解除好友关系
-* url: /user/relationship
+* url: /verification/user/relationship
     * 请求方法: delete
     * 参数
     ```
@@ -47,7 +47,7 @@
         }
         ```
 2. ### 获取好友列表
-    * url: /user/relationship
+    * url: /verification/user/relationship
     * 请求方法: get
     * 参数
     ```

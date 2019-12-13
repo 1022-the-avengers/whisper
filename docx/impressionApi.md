@@ -1,6 +1,6 @@
 # impression接口
 1. ### 更新好友印象
-    * url: /user/impression
+    * url: /verification/user/impression
     * 请求方法: post
     * 参数
     ```
@@ -28,8 +28,8 @@
             }
         }
         ```
-1. ### 获取好友印象
-    * url: /user/impression
+2. ### 获取好友印象
+    * url: /verification/user/impression
     * 请求方法: get
     * 参数
     ```

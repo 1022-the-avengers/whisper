@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/verification/user")
 public class RelationController {
     @Autowired
     RelationshipService relationshipService;
