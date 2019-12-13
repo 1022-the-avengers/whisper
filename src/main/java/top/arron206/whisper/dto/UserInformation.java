@@ -1,6 +1,6 @@
 package top.arron206.whisper.dto;
 
-public class UserIndexDto {
+public class UserInformation {
     private int id;
 
     private String nickname;
@@ -11,7 +11,7 @@ public class UserIndexDto {
 
     private Integer age;
 
-    public UserIndexDto(int id, String nickname, String pic, String gender, Integer age) {
+    public UserInformation(int id, String nickname, String pic, String gender, Integer age) {
         this.id = id;
         this.nickname = nickname;
         this.pic = pic;
@@ -19,7 +19,7 @@ public class UserIndexDto {
         this.age = age;
     }
 
-    public UserIndexDto(){
+    public UserInformation(){
 
     }
 

@@ -33,7 +33,7 @@ public class Message {
                 "/verification/message/index",
                 "index",
                 "application/json");
-        return new InfoMessage("获取成功", unreadMessages, unreadNum, new UserIndexDto(
+        return new InfoMessage("获取成功", unreadMessages, unreadNum, new UserInformation(
                 user.getId(), user.getNickname(), user.getPic(), user.getGender(), user.getAge()
         ), linkMessage);
     }
