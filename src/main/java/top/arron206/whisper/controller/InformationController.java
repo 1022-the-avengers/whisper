@@ -14,22 +14,22 @@ public class InformationController {
     UserInformationService userInformationService;
 
     @RequestMapping(value = "/information", method = RequestMethod.POST)
-    public GeneralResponse getInformation(@RequestBody User user) {
+    public GeneralResponse saveInformation(@RequestBody User user) {
         this.userInformationService.saveUserInformation(user);
-        return new GeneralResponse("资料创建/修改成功", null,
-                "collection http://localhost:8080/user",
-                "http://localhost:8080/user/information,",
-                "information of user",
-                "application/json");
+        return new GeneralResponse("用户资料修改成功", null,
+                "",
+                "",
+                "",
+                "");
     }
 
     @RequestMapping(value = "/information", method = RequestMethod.GET)
     public GeneralResponse getInformation(@RequestParam("id") int id) {
         UserInformation userInformation =  userInformationService.getUserInformation(id);
         return new GeneralResponse("用户资料请求成功", userInformation,
-                    "collection http://localhost:8080/user",
-                    "http://localhost:8080/user/information,",
-                    "information of user",
-                    "application/json");
+                    "",
+                    "",
+                    "",
+                    "");
     }
 }

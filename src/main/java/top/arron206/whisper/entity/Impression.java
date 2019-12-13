@@ -21,6 +21,15 @@ public class Impression  {
     @JoinColumn(name="target_id")
     private User target;
 
+    public Impression() {
+    }
+
+    public Impression(String content, User commenter, User target) {
+        this.content = content;
+        this.commenter = commenter;
+        this.target = target;
+    }
+
     public int getId() {
         return id;
     }

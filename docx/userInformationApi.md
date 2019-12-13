@@ -1,5 +1,5 @@
 # userInformation接口
-1. ### 创建/修改用户资料
+1. ### 修改用户资料
     * url: /user/information
     * 请求方法: post
     * 参数
@@ -16,7 +16,7 @@
         * 成功 200
         ```
         {
-            "message": "用户资料创建/修改成功",
+            "message": "用户资料修改成功",
             "data": null
             "link": {
                 "rel": "", 
