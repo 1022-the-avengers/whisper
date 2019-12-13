@@ -8,7 +8,7 @@ const Login = () => import('../views/login/login.vue')    //登录界面
 const Main = () => import('../views/main/main.vue')    //主界面
 const AddFriend = () => import('../views/addfriend/addfriend.vue')    //添加好友界面
 const ShowFriend = () => import('../views/showfriend/showfriend.vue')    //展示好友信息 
-const Home = () => import('../views/home/home.vue')
+// const Home = () => import('../views/home/home.vue')
 // const Login = () => import('../views/login/login.vue')
 const Register = () => import('../views/register/register.vue')
 const Chat = () => import('../views/chat/chat.vue')
@@ -37,11 +37,6 @@ export default new Router({
     {  path: '/register',
       name: Register,
       component: Register
-    },
-    {
-      path: '/home',
-      name: Home,
-      component: Home
     },
     {
       path: '/chat',
