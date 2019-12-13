@@ -6,6 +6,11 @@ Vue.prototype.axios = axios
 // axios.defaults.baseURL = 'http://192.168.1.105:8080' // 本地测试
 axios.defaults.baseURL = 'http://127.0.0.1:8080'
 
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
+Vue.prototype.SockJS = SockJS
+Vue.prototype.Stomp = Stomp
+
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
