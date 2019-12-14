@@ -11,15 +11,15 @@
         <img :src="info.pic" width="60px" height="60px" />
         <div>
           <div class="name">{{info.nickname}}</div>
-          <div>账号：{{"2638088319@qq.com"}}</div>
-          <div>性别：{{info.age}}</div>
+          <div>账号：{{info.account}}</div>
+          <div>性别：{{info.gender}}</div>
         </div>
       </div>
 
       <div class="tag">
         <div class="tag-title">印象</div>
         <div class="tag-items">
-          <div class="tag-item" v-for="item in info.tag" :key="item.key">{{item}}</div>
+          <div class="tag-item" v-for="item in info.impressions" :key="item.key">{{item}}</div>
         </div>
       </div>
       <mt-button size="large" type="primary">发送消息</mt-button>
@@ -34,19 +34,12 @@ export default {
   name: "chat",
   data() {
     return {
+      info: {},
       sheetVisible: false,
       actions: [
         {
           name: "删除好友",
-          method: function() {
-            MessageBox.confirm("此操作将删除好友")
-              .then(action => {
-                console.log("删除成功");
-              })
-              .catch(err => {
-                // console.log("删除取消");
-              });
-          }
+          method: this.deleteFriend
         },
         {
           name: "移动好友",
@@ -65,8 +58,8 @@ export default {
         {
           name: "添加标签",
           method: function() {
-            MessageBox.prompt(" ", "添加标签", {
-              inputPlaceholder: "输入标签的名字"
+            MessageBox.prompt(" ", "添加印象", {
+              inputPlaceholder: "输入印象的名字"
             })
               .then(({ value, action }) => {
                 console.log(value);
@@ -76,13 +69,33 @@ export default {
               });
           }
         }
-      ],
-      info: {}
+      ]
     };
   },
   methods: {
     actionSheet() {
       this.sheetVisible = true;
+    },
+    deleteFriend() {
+      var param = {customId:this.info.id};
+      MessageBox.confirm("此操作将删除好友")
+        .then(action => {
+          this.axios
+            .delete("/verification/user/relationship",{params:param})
+            .then(response => {
+              if (response.data.message == "好友关系解除成功") {
+                MessageBox.alert("好友关系解除成功").then(action => {
+                  this.$router.push({ path: "/main" });
+                });
+              }
+            })
+            .catch(err => {
+              console.log(err); //异常
+            });
+        })
+        .catch(err => {
+          // console.log("删除取消");
+        });
     }
   },
   created: function() {
