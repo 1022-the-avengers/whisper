@@ -45,7 +45,7 @@
         }
         ```
 2. ### 获取好友列表
-    * url: /verification/user/relationship
+    * url: /verification/user/relationships
     * 请求方法: get
     * 返回
         * 成功 200

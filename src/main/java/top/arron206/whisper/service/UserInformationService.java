@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserInformationService {
     void saveUserInformation(User user);
 
-    UserInformation getUserInformation(int id);
+    UserInformation getUserInformation();
 
     List<UserInformation> getUserInformations(String nickname, String gender, Integer minAge, Integer maxAge);
 }

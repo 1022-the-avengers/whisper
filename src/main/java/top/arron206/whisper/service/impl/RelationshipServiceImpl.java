@@ -7,6 +7,7 @@ import top.arron206.whisper.dao.UserRepository;
 import top.arron206.whisper.dto.UserInformation;
 import top.arron206.whisper.entity.Friendship;
 import top.arron206.whisper.entity.User;
+import top.arron206.whisper.service.ImpressionService;
 import top.arron206.whisper.service.RelationshipService;
 import top.arron206.whisper.service.UserService;
 import top.arron206.whisper.vo.RelationshipMessage;
@@ -24,6 +25,8 @@ public class RelationshipServiceImpl implements RelationshipService {
     UserRepository userRepository;
     @Autowired
     UserService userService;
+    @Autowired
+    ImpressionService impressionService;
 
     public boolean isFriend(User customer, User host){
         return friendshipRepository.findByCustomAndAndHost(host, customer) != null;
@@ -57,8 +60,9 @@ public class RelationshipServiceImpl implements RelationshipService {
             String groupName = friendship.getGroupName();
             if (!relations.containsKey(groupName))
                 relations.put(groupName, new ArrayList<UserInformation>());
-            User user = this.userRepository.findById(friendship.getCustom().getId());
-            UserInformation userInformation = new UserInformation(user);
+            User friend = friendship.getCustom();
+            List<String> impressions = impressionService.getImpressions(friend.getId());
+            UserInformation userInformation = new UserInformation(friend, impressions);
             relations.get(groupName).add(userInformation);
         }
         return relations;
