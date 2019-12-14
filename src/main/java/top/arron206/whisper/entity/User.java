@@ -22,7 +22,7 @@ public class User {
     @Column(nullable = false, length = 20)
     private String nickname;
 
-    @Column()
+    @Column(columnDefinition="text")
     private String pic;
 
     @Column(length = 2)
