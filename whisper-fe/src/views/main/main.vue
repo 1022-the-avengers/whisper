@@ -4,7 +4,8 @@
       <mt-tab-container class="page-tabbar-container" v-model="selected">
         <mt-tab-container-item id="message">
           <mt-cell>
-            <chat></chat>
+            <chatbox @func="getID"></chatbox>
+            <!-- <chat></chat> -->
           </mt-cell>
         </mt-tab-container-item>
         <mt-tab-container-item id="friend">
@@ -33,12 +34,18 @@
 <script>
 import Friend from "../friend/friend.vue";
 import Chat from "../chat/chat.vue";
+import Chatbox from "../chatbox/chatbox.vue";
 export default {
   name: "main",
   data() {
     return {
       selected: "message"
     };
+  },
+  methods: {
+    getID(data) {
+      console.log(data);
+    }
   },
   watch: {
     selected: function(val, oldVal) {
@@ -47,7 +54,8 @@ export default {
   },
   components: {
     chat: Chat,
-    friend: Friend
+    friend: Friend,
+    chatbox: Chatbox
   },
   created: function() {
     if (!sessionStorage.getItem("MainPage")) {
@@ -58,7 +66,7 @@ export default {
     this.selected = sessionStorage.getItem("MainPage");
 
     this.axios
-      .get("/verification/user/relationship")
+      .get("/verification/user/relationships")
       .then((response) => {
         sessionStorage.setItem("friends",JSON.stringify(response.data.data));
       })
