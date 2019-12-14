@@ -3,6 +3,7 @@
     <div class="header">
       <span @click="goBack" class="iconfont">&#xe61b;</span>
       这是哈士奇
+      <span @click="download" class="iconfont">&#xe61b;</span>
     </div>
     <div class="content">
       <div v-for="(item, index) in historyMessages" :key="index">
@@ -49,7 +50,10 @@ export default {
   data() {
     return {
       inputMessage: "",
-      historyMessages: [{ my: "这是一条历史消息" }, {he: "这别人发过来的历史消息"}],
+      historyMessages: [
+        { my: "这是一条历史消息" },
+        { he: "这别人发过来的历史消息" }
+      ],
       Messages: [{ my: "这是发给某人的一条消息" }, { my: "这是另一个" }]
     };
   },
@@ -124,23 +128,37 @@ export default {
       }
     },
     getHistory() {
-      this.axios('/verification/message/history', {
+      this.axios("/verification/message/history", {
         params: {
-          customer: 3,  // 和B的聊天记录 customer:B的id
+          customer: 3, // 和B的聊天记录 customer:B的id
           page: -1
         }
-      }).then((res) => {
-        this.historyMessages = res.data.historyMessage
-      })
+      }).then(res => {
+        this.historyMessages = res.data.historyMessage;
+      });
     },
     goBack() {
       this.$router.go(-1);
+    },
+    download() {
+      this.axios("/verification/message/history/download", {
+        params: {
+          customer: 3
+        }
+      }).then(res => {
+        let aTag = document.createElement("a");
+        let blob = new Blob([res.data]);
+        aTag.download = "download.txt";
+        aTag.href = URL.createObjectURL(blob);
+        aTag.click();
+        URL.revokeObjectURL(blob);
+      });
     }
   },
   mounted() {
     this.initWebSocket();
     // 请求聊天记录
-    this.getHistory()
+    this.getHistory();
   },
   beforeDestroy() {
     // 页面离开时断开连接,清除定时器
