@@ -29,19 +29,16 @@ public class UserInformationServiceImpl implements UserInformationService {
         this.userRepository.save(user);
     }
 
-    public UserInformation getUserInformation() {
-        userService.setUser();
-        User user = userService.getUser();
-        return new UserInformation(user.getId(), user.getNickname(),
-                user.getPic(), user.getGender(), user.getAge());
+    public UserInformation getUserInformation(int id) {
+        User user = userService.findById(id);
+        return new UserInformation(user);
     }
 
     public List<UserInformation> getUserInformations(String nickname, String gender, Integer minAge, Integer maxAge) {
         List<User> users = this.userRepository.getUsers(nickname, gender, minAge, maxAge);
         List<UserInformation> userInformations = new ArrayList<>();
         for (User user : users)
-            userInformations.add(new UserInformation(user.getId(), user.getNickname(),
-                    user.getPic(), user.getGender(), user.getAge()));
+            userInformations.add(new UserInformation(user));
         return userInformations;
     }
 }

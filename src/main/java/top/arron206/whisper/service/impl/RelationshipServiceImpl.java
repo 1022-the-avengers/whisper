@@ -58,8 +58,7 @@ public class RelationshipServiceImpl implements RelationshipService {
             if (!relations.containsKey(groupName))
                 relations.put(groupName, new ArrayList<UserInformation>());
             User user = this.userRepository.findById(friendship.getCustom().getId());
-            UserInformation userInformation = new UserInformation(user.getId(), user.getNickname(),
-                    user.getPic(), user.getGender(), user.getAge());
+            UserInformation userInformation = new UserInformation(user);
             relations.get(groupName).add(userInformation);
         }
         return relations;
