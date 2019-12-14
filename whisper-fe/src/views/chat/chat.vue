@@ -5,7 +5,22 @@
       这是哈士奇
     </div>
     <div class="content">
-      <div v-for="(item, index) in Messages" :key="index">
+      <div v-for="(item, index) in historyMessages" :key="index">
+        <div class="content_item" v-if="item.my">
+          <div class="msg">
+            <span class="info">{{item.my}}</span>
+          </div>
+          <img class="avator" alt="你的头像" src="http://img.flura.cn/myAvatar.jpg" />
+        </div>
+
+        <div class="content_response" v-else>
+          <img class="avator" alt="他的头像" src="http://img.flura.cn/robot.jpg" />
+          <div class="msg">
+            <span class="info">{{item.he}}</span>
+          </div>
+        </div>
+      </div>
+      <div v-for="(item, index) in Messages" :key="index+1000">
         <div class="content_item" v-if="item.my">
           <div class="msg">
             <span class="info">{{item.my}}</span>
@@ -34,6 +49,7 @@ export default {
   data() {
     return {
       inputMessage: "",
+      historyMessages: [{ my: "这是一条历史消息" }, {he: "这别人发过来的历史消息"}],
       Messages: [{ my: "这是发给某人的一条消息" }, { my: "这是另一个" }]
     };
   },
@@ -107,12 +123,24 @@ export default {
         console.log("Disconnected");
       }
     },
+    getHistory() {
+      this.axios('/verification/message/history', {
+        params: {
+          customber: 4,  // 和B的聊天记录 customer:B的id
+          page: -1
+        }
+      }).then((res) => {
+        console.log('history: ',res)
+      })
+    },
     goBack() {
       this.$router.go(-1);
     }
   },
   mounted() {
     this.initWebSocket();
+    // 请求聊天记录
+    this.getHistory()
   },
   beforeDestroy() {
     // 页面离开时断开连接,清除定时器
