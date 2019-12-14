@@ -1,19 +1,18 @@
 <template>
-  <div >
-
+  <div>
     <div class="page-container">
-    <mt-tab-container class="page-tabbar-container" v-model="selected">
-      <mt-tab-container-item id="message">
-        <mt-cell>
+      <mt-tab-container class="page-tabbar-container" v-model="selected">
+        <mt-tab-container-item id="message">
+          <mt-cell>
             <chat></chat>
-        </mt-cell>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="friend">
-        <mt-cell>
+          </mt-cell>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="friend">
+          <mt-cell>
             <friend></friend>
-        </mt-cell>
-      </mt-tab-container-item>
-    </mt-tab-container>
+          </mt-cell>
+        </mt-tab-container-item>
+      </mt-tab-container>
     </div>
 
     <mt-tabbar v-model="selected">
@@ -32,8 +31,8 @@
 </template>
 
 <script>
-import Friend from '../friend/friend.vue'
-import Chat from '../chat/chat.vue'
+import Friend from "../friend/friend.vue";
+import Chat from "../chat/chat.vue";
 export default {
   name: "main",
   data() {
@@ -43,12 +42,29 @@ export default {
   },
   watch: {
     selected: function(val, oldVal) {
-      console.log(val);
+      sessionStorage.setItem("MainPage", val);
     }
   },
-  components:{
-      "chat":Chat,
-      "friend":Friend
+  components: {
+    chat: Chat,
+    friend: Friend
+  },
+  created: function() {
+    if (!sessionStorage.getItem("MainPage")) {
+      //初始化，判断主页面是消息，还是好友
+      sessionStorage.setItem("MainPage", "message");
+      
+    }
+    this.selected = sessionStorage.getItem("MainPage");
+
+    this.axios
+      .get("/verification/user/relationship")
+      .then((response) => {
+        sessionStorage.setItem("friends",JSON.stringify(response.data.data));
+      })
+      .catch(err => {
+        console.log(error);//异常
+      });
   }
 };
 </script>

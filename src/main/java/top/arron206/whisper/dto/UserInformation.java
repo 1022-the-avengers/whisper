@@ -1,7 +1,13 @@
 package top.arron206.whisper.dto;
 
+import top.arron206.whisper.entity.User;
+
+import java.util.List;
+
 public class UserInformation {
     private int id;
+
+    private String account;
 
     private String nickname;
 
@@ -10,6 +16,18 @@ public class UserInformation {
     private String gender;
 
     private Integer age;
+
+    private List<String> impressions;
+
+    public UserInformation(User user, List<String> impressions) {
+        this.id = user.getId();
+        this.account = user.getAccount();
+        this.nickname = user.getNickname();
+        this.pic = user.getPic();
+        this.gender = user.getGender();
+        this.age = user.getAge();
+        this.impressions = impressions;
+    }
 
     public UserInformation(int id, String nickname, String pic, String gender, Integer age) {
         this.id = id;
@@ -29,6 +47,14 @@ public class UserInformation {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getNickname() {
@@ -61,5 +87,13 @@ public class UserInformation {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public List<String> getImpressions() {
+        return impressions;
+    }
+
+    public void setImpressions(List<String> impressions) {
+        this.impressions = impressions;
     }
 }

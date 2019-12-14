@@ -1,6 +1,6 @@
 <template>
   <div class="fri">
-    <mt-header title="link聊天"/>
+    <mt-header title="link聊天" />
 
     <div>
       <mt-cell to="/main/addfriend">
@@ -13,11 +13,14 @@
       </mt-cell>
     </div>
     <div class="split"></div>
-    <div v-for="item in friends">
-      <mt-cell to="/main/showfriend">
-        <span>{{item.name}}</span>
-        <img slot="icon" v-bind:src="item.photo" width="28" height="28" />
-      </mt-cell>
+    <div>
+      <div v-for="(value,key) in friends" :key="key">
+        <mt-cell :title="key"></mt-cell>
+        <mt-cell v-for="(value2,key2) in value" :key="key2" :to="'/main/showfriend?group='+key+'&id='+key2" >
+          <span>{{value2.nickname}}</span>
+          <img slot="icon" v-bind:src="value2.pic" width="28" height="28"/>
+        </mt-cell>
+      </div>
     </div>
   </div>
 </template>
@@ -27,25 +30,14 @@ export default {
   name: "friend",
   data() {
     return {
-      friends: [
-        {
-          photo: "/assets/friend/photo.jfif",
-          name: "沙雕郑"
-        },
-        {
-          photo: "/assets/friend/photo.jfif",
-          name: "郑沙雕"
-        },
-        {
-          photo: "/assets/friend/photo.jfif",
-          name: "沙郑雕"
-        },
-        {
-          photo: "/assets/friend/photo.jfif",
-          name: "雕沙郑"
-        }
-      ]
+      friends:{}
     };
+  },
+  created:function(){
+    console.log(JSON.parse(sessionStorage.getItem("friends")));
+    this.friends=JSON.parse(sessionStorage.getItem("friends"));
+  },
+  methods:{
   }
 };
 </script>

@@ -36,8 +36,8 @@ public class RelationController {
                 "");
     }
 
-    @RequestMapping(value = "/relationship", method = RequestMethod.GET)
-    public GeneralResponse getRelationship() {
+    @RequestMapping(value = "/relationships", method = RequestMethod.GET)
+    public GeneralResponse getRelationships() {
         Map<String, List<UserInformation>> relationships = this.relationshipService.getRelationShips();
         return new GeneralResponse("好友列表获取成功", relationships,
                 "",
