@@ -2,9 +2,11 @@ package top.arron206.whisper.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import top.arron206.whisper.dao.impl.UserSearch;
 import top.arron206.whisper.dto.UserInformation;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.UserInformationService;
+import top.arron206.whisper.service.UserService;
 import top.arron206.whisper.vo.GeneralResponse;
 
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
 public class InformationController {
     @Autowired
     UserInformationService userInformationService;
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/information", method = RequestMethod.POST)
     public GeneralResponse saveInformation(@RequestBody User user) {
@@ -26,8 +30,8 @@ public class InformationController {
     }
 
     @RequestMapping(value = "/information", method = RequestMethod.GET)
-    public GeneralResponse getInformation(@RequestParam("id") int id) {
-        UserInformation userInformation =  userInformationService.getUserInformation(id);
+    public GeneralResponse getInformation() {
+        UserInformation userInformation =  userInformationService.getUserInformation();
         return new GeneralResponse("用户资料请求成功", userInformation,
                     "",
                     "",

@@ -7,6 +7,7 @@ import top.arron206.whisper.dao.UserRepository;
 import top.arron206.whisper.entity.Impression;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.ImpressionService;
+import top.arron206.whisper.service.UserService;
 import top.arron206.whisper.vo.ImpressionMessage;
 
 import java.util.ArrayList;
@@ -18,9 +19,12 @@ public class ImpressionServiceImpl implements ImpressionService {
     ImpressionRepository impressionRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserService userService;
 
     public void saveImpression(ImpressionMessage impressionMessage) {
-        User commenter = new User(impressionMessage.getCommenterId());
+        userService.setUser();
+        User commenter = userService.getUser();
         User target = new User(impressionMessage.getTargetId());
         List<Impression> preImpressions = this.impressionRepository.findByCommenterAndTarget(commenter, target);
         this.impressionRepository.deleteAll(preImpressions);

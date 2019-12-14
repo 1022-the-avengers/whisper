@@ -27,9 +27,8 @@ public class RelationController {
     }
 
     @RequestMapping(value = "/relationship", method = RequestMethod.DELETE)
-    public GeneralResponse deleteRelationship(@RequestParam("hostId") int hostId,
-                                          @RequestParam("customId") int customId) {
-        this.relationshipService.deleteRelationShip(hostId, customId);
+    public GeneralResponse deleteRelationship(@RequestParam("customId") int customId) {
+        this.relationshipService.deleteRelationShip(customId);
         return new GeneralResponse("好友关系解除成功", null,
                 "",
                 "",
@@ -38,8 +37,8 @@ public class RelationController {
     }
 
     @RequestMapping(value = "/relationship", method = RequestMethod.GET)
-    public GeneralResponse getRelationship(@RequestParam("hostId") int hostId) {
-        Map<String, List<UserInformation>> relationships = this.relationshipService.getRelationShips(hostId);
+    public GeneralResponse getRelationship() {
+        Map<String, List<UserInformation>> relationships = this.relationshipService.getRelationShips();
         return new GeneralResponse("好友列表获取成功", relationships,
                 "",
                 "",

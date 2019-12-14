@@ -5,7 +5,6 @@
     * 参数
     ```
     {
-        "commenterId": "3",
         "targetId": "4",
         "contents": [
             "印象1",
