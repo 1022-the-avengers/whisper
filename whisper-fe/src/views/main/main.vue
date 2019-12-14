@@ -42,7 +42,7 @@ export default {
   },
   watch: {
     selected: function(val, oldVal) {
-      localStorage.setItem("MainPage", val);
+      sessionStorage.setItem("MainPage", val);
     }
   },
   components: {
@@ -50,16 +50,17 @@ export default {
     friend: Friend
   },
   created: function() {
-    if (!localStorage.getItem("MainPage")) {
+    if (!sessionStorage.getItem("MainPage")) {
       //初始化，判断主页面是消息，还是好友
-      localStorage.setItem("MainPage", "message");
+      sessionStorage.setItem("MainPage", "message");
+      
     }
-    this.selected = localStorage.getItem("MainPage");
+    this.selected = sessionStorage.getItem("MainPage");
 
     this.axios
       .get("/verification/user/relationship")
       .then((response) => {
-        console.log(response.data);
+        sessionStorage.setItem("friends",JSON.stringify(response.data.data));
       })
       .catch(err => {
         console.log(error);//异常

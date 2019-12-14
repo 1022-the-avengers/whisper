@@ -16,9 +16,9 @@
     <div>
       <div v-for="(value,key) in friends" :key="key">
         <mt-cell :title="key"></mt-cell>
-        <mt-cell v-for="item in value" :key="item.key" to="/main/showfriend">
-          <span>{{item.nickname}}</span>
-          <img slot="icon" v-bind:src="item.pic" width="28" height="28" />
+        <mt-cell v-for="(value2,key2) in value" :key="key2" :to="'/main/showfriend?group='+key+'&id='+key2" >
+          <span>{{value2.nickname}}</span>
+          <img slot="icon" v-bind:src="value2.pic" width="28" height="28"/>
         </mt-cell>
       </div>
     </div>
@@ -30,34 +30,14 @@ export default {
   name: "friend",
   data() {
     return {
-      friends: {
-        高中: [
-          {
-            id: 5,
-            nickname: "Marron",
-            pic: null,
-            gender: "男",
-            age: 38
-          },
-          {
-            id: 6,
-            nickname: "康王",
-            pic: null,
-            gender: null,
-            age: 45
-          }
-        ],
-        小学: [
-          {
-            id: 4,
-            nickname: "Marron",
-            pic: "sdfdsfdf",
-            gender: "女",
-            age: 18
-          }
-        ]
-      }
+      friends:{}
     };
+  },
+  created:function(){
+    console.log(JSON.parse(sessionStorage.getItem("friends")));
+    this.friends=JSON.parse(sessionStorage.getItem("friends"));
+  },
+  methods:{
   }
 };
 </script>
