@@ -6,7 +6,6 @@
     ```
     {
         "groupName": "小学",
-        "hostId": "3",
         "customId": "4"
     }
     ```
@@ -29,7 +28,6 @@
     * 请求方法: delete
     * 参数
     ```
-    hostId=用户id
     customId=被删除好友id
     ```
     * 返回
@@ -49,10 +47,6 @@
 2. ### 获取好友列表
     * url: /verification/user/relationship
     * 请求方法: get
-    * 参数
-    ```
-    hostId=用户id
-    ```
     * 返回
         * 成功 200
         ```

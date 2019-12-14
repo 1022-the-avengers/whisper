@@ -14,7 +14,7 @@ public interface RelationshipService {
 
     void saveRelationShip(RelationshipMessage relationshipMessage);
 
-    void deleteRelationShip(int hostId, int customId);
+    void deleteRelationShip(int customId);
 
-    Map<String, List<UserInformation>> getRelationShips(int hostId);
+    Map<String, List<UserInformation>> getRelationShips();
 }

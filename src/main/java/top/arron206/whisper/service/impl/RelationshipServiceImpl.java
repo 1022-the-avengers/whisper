@@ -8,6 +8,7 @@ import top.arron206.whisper.dto.UserInformation;
 import top.arron206.whisper.entity.Friendship;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.RelationshipService;
+import top.arron206.whisper.service.UserService;
 import top.arron206.whisper.vo.RelationshipMessage;
 
 import java.util.ArrayList;
@@ -21,13 +22,16 @@ public class RelationshipServiceImpl implements RelationshipService {
     FriendshipRepository friendshipRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserService userService;
 
     public boolean isFriend(User customer, User host){
         return friendshipRepository.findByCustomAndAndHost(host, customer) != null;
     }
 
     public void saveRelationShip(RelationshipMessage relationshipMessage) {
-        User host = new User(relationshipMessage.getHostId());
+        userService.setUser();
+        User host = userService.getUser();
         User custom = new User(relationshipMessage.getCustomId());
         Friendship friendshipInDB = this.friendshipRepository.findByCustomAndAndHost(custom, host);
         if (friendshipInDB != null)
@@ -36,15 +40,17 @@ public class RelationshipServiceImpl implements RelationshipService {
         this.friendshipRepository.save(friendship);
     }
 
-    public void deleteRelationShip(int hostId, int customId) {
-        User host = new User(hostId);
+    public void deleteRelationShip(int customId) {
+        userService.setUser();
+        User host = userService.getUser();
         User custom = new User(customId);
         Friendship friendshipInDB = this.friendshipRepository.findByCustomAndAndHost(custom, host);
         this.friendshipRepository.delete(friendshipInDB);
     }
 
-    public Map<String, List<UserInformation>> getRelationShips(int hostId) {
-        User host = this.userRepository.findById(hostId);
+    public Map<String, List<UserInformation>> getRelationShips() {
+        userService.setUser();
+        User host = userService.getUser();
         List<Friendship> friendships = host.getHostFriendship();
         Map<String, List<UserInformation>> relations = new LinkedHashMap<>();
         for (Friendship friendship : friendships) {

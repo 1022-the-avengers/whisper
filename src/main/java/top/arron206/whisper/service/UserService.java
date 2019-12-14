@@ -13,6 +13,9 @@ public interface UserService {
     void setUser(User user);
     User setUser();
     User findById(int id);
+    void initPic();
+    void setGender(String gender);
+    void setAge(int age);
     void setUserInDataBase(User userInDataBase);
     User getUserInDataBase();
 //    boolean isFriend();

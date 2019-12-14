@@ -8,6 +8,7 @@ import top.arron206.whisper.dao.UserRepository;
 import top.arron206.whisper.dto.UserInformation;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.UserInformationService;
+import top.arron206.whisper.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +17,21 @@ import java.util.List;
 public class UserInformationServiceImpl implements UserInformationService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserService userService;
 
     public void saveUserInformation(User user) {
-        User realUser = this.userRepository.findById(user.getId());
+        userService.setUser();
+        User realUser = userService.getUser();
+        user.setId(realUser.getId());
         user.setAccount(realUser.getAccount());
         user.setPassword(realUser.getPassword());
         this.userRepository.save(user);
     }
 
-    public UserInformation getUserInformation(int id) {
-        User user = this.userRepository.findById(id);
+    public UserInformation getUserInformation() {
+        userService.setUser();
+        User user = userService.getUser();
         return new UserInformation(user.getId(), user.getNickname(),
                 user.getPic(), user.getGender(), user.getAge());
     }

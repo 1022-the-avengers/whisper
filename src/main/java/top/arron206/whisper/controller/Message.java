@@ -27,15 +27,18 @@ public class Message {
     RecordRepository recordRepository;
 
     @RequestMapping(value = "/index", method = {RequestMethod.GET})
-    public InfoMessage getIndex(){
+    public InfoMessage getIndex(@RequestParam Integer customer){
         User user = userService.setUser();
+        if(!(customer==null||customer==-1)){
+            userMessage.readMessage(user.getId(),customer);
+        }
         Map<Object, Object> unreadMessages = userMessage.getAllUnread(user.getId());
         Map<Object, Object> unreadNum = userMessage.getAllUnreadNum(user.getId());
         LinkMessage linkMessage = new LinkMessage(
-                "index /verification/message/index",
-                "/verification/message/index",
-                "index",
-                "application/json");
+                "",
+                "",
+                "",
+                "");
         return new InfoMessage("获取成功", unreadMessages, unreadNum, new UserInformation(
                 user.getId(), user.getNickname(), user.getPic(), user.getGender(), user.getAge()
         ), linkMessage);
@@ -51,10 +54,10 @@ public class Message {
             chatMessages.add(new ChatMessage(recordDto, recordDto.getSenderId()==user.getId()));
         }
         LinkMessage linkMessage = new LinkMessage(
-                "index /verification/message/index",
-                "/verification/message/index",
-                "index",
-                "application/json");
+                "",
+                "",
+                "",
+                "");
         return new HistoryMessage("获取成功", chatMessages, linkMessage);
     }
 
@@ -63,10 +66,10 @@ public class Message {
         User user = userService.setUser();
         userMessage.readMessage(user.getId(), customer);
         LinkMessage linkMessage = new LinkMessage(
-                "index /verification/message/index",
-                "/verification/message/index",
-                "index",
-                "application/json");
+                "",
+                "",
+                "",
+                "");
         return new StatusMessage("读取成功", linkMessage);
     }
 }
