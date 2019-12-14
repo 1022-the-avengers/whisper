@@ -60,6 +60,9 @@ public class Auth {
                     "/auth/registration", "registration", "application/json"));
         }else{
             userService.encode();
+            userService.initPic();
+            userService.setAge(1);
+            userService.setGender("男");
             userService.save();
             response.setStatus(201);
             return AuthMessage.getAuthMessage(
