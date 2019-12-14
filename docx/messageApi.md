@@ -9,7 +9,7 @@ Authorization: "Bearer "+token
 ```
 * Query Params
 ```
-无
+customer:要清除聊天记录的对象的id
 ```
 * 返回
     * 成功 200
@@ -74,40 +74,109 @@ page: 第几页，一页默认返回15条
         "message": "获取成功",
         "historyMessage": [
             {
-                "content": "日尼玛",
-                "time": "2019-12-07T03:05:41.257+0000",
+                "senderId": 3,
+                "recipientId": 4,
+                "content": {
+                    "my": "10086"
+                }
+            },
+            {
                 "senderId": 4,
-                "recipientId": 3
+                "recipientId": 3,
+                "content": {
+                    "he": "asd"
+                }
             },
             {
-                "content": "日尼玛",
-                "time": "2019-12-07T03:04:21.479+0000",
                 "senderId": 4,
-                "recipientId": 3
+                "recipientId": 3,
+                "content": {
+                    "he": "shift"
+                }
             },
             {
-                "content": "沃日",
-                "time": "2019-12-07T03:04:05.107+0000",
-                "senderId": 3,
-                "recipientId": 4
+                "senderId": 4,
+                "recipientId": 3,
+                "content": {
+                    "he": "asd"
+                }
             },
             {
-                "content": "沃日",
-                "time": "2019-12-07T03:02:46.515+0000",
-                "senderId": 3,
-                "recipientId": 4
+                "senderId": 4,
+                "recipientId": 3,
+                "content": {
+                    "he": "asdf"
+                }
             },
             {
-                "content": "说话啊",
-                "time": "2019-12-07T01:15:43.115+0000",
-                "senderId": 3,
-                "recipientId": 4
+                "senderId": 4,
+                "recipientId": 3,
+                "content": {
+                    "he": "asdf"
+                }
             },
             {
-                "content": "沃日",
-                "time": "2019-12-07T01:15:08.746+0000",
+                "senderId": 4,
+                "recipientId": 3,
+                "content": {
+                    "he": "asdf"
+                }
+            },
+            {
+                "senderId": 4,
+                "recipientId": 3,
+                "content": {
+                    "he": "asd"
+                }
+            },
+            {
+                "senderId": 4,
+                "recipientId": 3,
+                "content": {
+                    "he": "s"
+                }
+            },
+            {
+                "senderId": 4,
+                "recipientId": 3,
+                "content": {
+                    "he": "asdfsd"
+                }
+            },
+            {
                 "senderId": 3,
-                "recipientId": 4
+                "recipientId": 4,
+                "content": {
+                    "my": "a"
+                }
+            },
+            {
+                "senderId": 3,
+                "recipientId": 4,
+                "content": {
+                    "my": "345"
+                }
+            },
+            {
+                "senderId": 3,
+                "recipientId": 4,
+                "content": {
+                    "my": "123"
+                }
+            },
+            {
+                "senderId": 3,
+                "recipientId": 4,
+                "content": {
+                    "my": "54645"
+                }
+            },
+            {
+                "senderId": 3,
+                "recipientId": 4,
+                "content": {
+                    "my": "1243"
+                }
             }
         ],
         "link": {
