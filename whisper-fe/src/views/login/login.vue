@@ -78,7 +78,7 @@ export default {
         setTimeout(() => {
           localStorage.setItem("chatEmail", this.email);
           localStorage.setItem("chatToken", res.data.token);
-          this.$router.push({ path: "/" });
+          this.$router.push({ path: "/main" });
         }, 500);
       }
     }
