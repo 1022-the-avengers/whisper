@@ -34,12 +34,10 @@ public class InformationController {
                 "");
     }
 
-    @RequestMapping(value = "/whole-information", method = RequestMethod.GET)
-    public GeneralResponse getInformation(@RequestParam("id") int id) {
-        UserInformation userInformation =  userInformationService.getUserInformation(id);
-        List<String> impressions = impressionService.getImpressions(id);
-        InformationMessage informationMessage = new InformationMessage(userInformation, impressions);
-        return new GeneralResponse("用户资料请求成功", informationMessage,
+    @RequestMapping(value = "/information", method = RequestMethod.GET)
+    public GeneralResponse getInformation() {
+        UserInformation userInformation =  userInformationService.getUserInformation();
+        return new GeneralResponse("用户资料请求成功", userInformation,
                 "",
                 "",
                 "",
@@ -47,7 +45,7 @@ public class InformationController {
     }
 
     @RequestMapping(value = "/informations", method = RequestMethod.GET)
-    public GeneralResponse getInformation(@RequestParam(name = "nickname", required = false) String nickname,
+    public GeneralResponse getInformations(@RequestParam(name = "nickname", required = false) String nickname,
                                           @RequestParam(name = "gender", required = false) String gender,
                                           @RequestParam(name = "minAge", required = false) int minAge,
                                           @RequestParam(name = "maxAge", required = false) int maxAge) {

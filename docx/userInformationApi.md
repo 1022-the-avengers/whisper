@@ -28,30 +28,18 @@
 2. ### 获取用户资料
     * url: /verification/user/information
     * 请求方法: get
-     * 参数
-        ```
-       id=用户id
-        ```
     * 返回
         * 成功 200
         ```
         {
             "message": "用户资料请求成功",
-                "data": {
-                    "userInformation": {
-                        "id": 4,
-                        "account": "18357922710",
-                        "nickname": "Marron",
-                        "pic": "..."
-                        "gender": "女",
-                        "age": 18
-                    },
-                    "impressions": [
-                        "给",
-                        "地方",
-                        "阿道夫",
-                        "风格"
-                    ]
+                "data":"id": 3,
+                       "account": "897013045@qq.com",
+                       "nickname": "Marron",
+                       "pic": "...."
+                       "gender": "男",
+                       "age": 16,
+                       "impressions": []
             "link": {
                 "rel": "", 
                 "href": "",            
