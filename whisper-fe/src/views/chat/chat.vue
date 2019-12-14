@@ -78,7 +78,7 @@ export default {
           JSON.stringify({
             content: { my: this.inputMessage },
             senderId: 3,
-            recipientId: 4
+            recipientId: 6
           })
         );
         console.log("inputMessage: ", this.inputMessage);
@@ -126,11 +126,11 @@ export default {
     getHistory() {
       this.axios('/verification/message/history', {
         params: {
-          customber: 4,  // 和B的聊天记录 customer:B的id
+          customer: 3,  // 和B的聊天记录 customer:B的id
           page: -1
         }
       }).then((res) => {
-        console.log('history: ',res)
+        this.historyMessages = res.data.historyMessage
       })
     },
     goBack() {
