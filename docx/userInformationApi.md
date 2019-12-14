@@ -26,20 +26,32 @@
         }
         ```
 2. ### 获取用户资料
-    * url: /user/information
+    * url: /verification/user/information
     * 请求方法: get
+     * 参数
+        ```
+       id=用户id
+        ```
     * 返回
         * 成功 200
         ```
         {
             "message": "用户资料请求成功",
-            "data": {
-                    "id" : "账号"
-                    "nickname":"昵称",
-                    "age":"年龄",
-                    "gender" : "性别",
-                    "pic" : "图片"
-            }
+                "data": {
+                    "userInformation": {
+                        "id": 4,
+                        "account": "18357922710",
+                        "nickname": "Marron",
+                        "pic": "..."
+                        "gender": "女",
+                        "age": 18
+                    },
+                    "impressions": [
+                        "给",
+                        "地方",
+                        "阿道夫",
+                        "风格"
+                    ]
             "link": {
                 "rel": "", 
                 "href": "",            
