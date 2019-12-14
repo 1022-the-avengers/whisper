@@ -35,10 +35,10 @@ public class Message {
         Map<Object, Object> unreadMessages = userMessage.getAllUnread(user.getId());
         Map<Object, Object> unreadNum = userMessage.getAllUnreadNum(user.getId());
         LinkMessage linkMessage = new LinkMessage(
-                "index /verification/message/index",
-                "/verification/message/index",
-                "index",
-                "application/json");
+                "",
+                "",
+                "",
+                "");
         return new InfoMessage("获取成功", unreadMessages, unreadNum, new UserInformation(
                 user.getId(), user.getNickname(), user.getPic(), user.getGender(), user.getAge()
         ), linkMessage);
@@ -66,10 +66,10 @@ public class Message {
         User user = userService.setUser();
         userMessage.readMessage(user.getId(), customer);
         LinkMessage linkMessage = new LinkMessage(
-                "index /verification/message/index",
-                "/verification/message/index",
-                "index",
-                "application/json");
+                "",
+                "",
+                "",
+                "");
         return new StatusMessage("读取成功", linkMessage);
     }
 }
