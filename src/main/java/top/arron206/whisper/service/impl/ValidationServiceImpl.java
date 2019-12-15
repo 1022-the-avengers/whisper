@@ -49,13 +49,15 @@ public class ValidationServiceImpl implements ValidationService {
         if (validation.getStatus() == 1) {
             validation.setStatus(validationMessage.getStatus());
             validationMessageRepository.save(validation);
-            //添加好友
-            Friendship friendship_1 = new Friendship("默认分组",
-                    validation.getSender(), validation.getReceiver());
-            Friendship friendship_2 = new Friendship("默认分组",
-                    validation.getReceiver(), validation.getSender());
-            friendshipRepository.save(friendship_1);
-            friendshipRepository.save(friendship_2);
+            if (validationMessage.getStatus() == 2) {
+                //添加好友
+                Friendship friendship_1 = new Friendship("默认分组",
+                        validation.getSender(), validation.getReceiver());
+                Friendship friendship_2 = new Friendship("默认分组",
+                        validation.getReceiver(), validation.getSender());
+                friendshipRepository.save(friendship_1);
+                friendshipRepository.save(friendship_2);
+            }
         }
     }
 

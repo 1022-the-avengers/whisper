@@ -15,7 +15,7 @@ public class UserRepositoryImpl implements UserSearch {
 
     @Override
     public List<User> getUsers(String nickname, String gender, Integer minAge, Integer maxAge) {
-        String sql = "SELECT * FROM user WHERE (nickname like ?) and (gender like ?) and (age>?) and (age<?)";
+        String sql = "SELECT * FROM user WHERE (nickname like ?) and (gender like ?) and (age>=?) and (age<=?)";
         if (nickname == null)
             nickname = "%";
         else
