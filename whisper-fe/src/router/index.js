@@ -15,7 +15,7 @@ const Chat = () => import('../views/chat/chat.vue')
 
 const ModifyInfo = () => import('../views/modifyinfo/modifyinfo.vue')    //修改个人信息页面 
 const ConfirmAdd = () => import('../views/confirmadd/confirmadd.vue')    //发送好友请求页面 
-const TestFriend = () => import('../views/testfriend/testfriend.vue')    //确认好友请求
+const TestFriend = () => import('../views/testfriend/testfriend.vue')    //验证好友请求
 
 
 export default new Router({
