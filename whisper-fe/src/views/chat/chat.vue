@@ -55,11 +55,8 @@ export default {
   data() {
     return {
       inputMessage: "",
-      historyMessages: [
-        { my: "这是一条历史消息" },
-        { he: "这别人发过来的历史消息" }
-      ],
-      Messages: [{ my: "这是发给某人的一条消息" }, { my: "这是另一个" }],
+      historyMessages: [],
+      Messages: [],
       myPic: window.localStorage.getItem("userPic"),
       hisPic: window.localStorage.getItem("hisPic"),
       userId: window.localStorage.getItem("userId"),
@@ -193,7 +190,8 @@ export default {
     );
     // this.hisPic = this.$route.params.message.pic
     this.recipientId = this.$route.params.recipientId;
-    this.nickName = this.$route.params.message.nickName
+    this.nickName = this.$route.params.message.nickname
+    console.log('this.nickName : ', this.nickName )
     window.localStorage.setItem("hisPic", this.$route.params.message.pic);
   },
   mounted() {
