@@ -15,10 +15,18 @@
     line-height: 50px;
     text-align: center;
     background: #01AFFF;
+
     span {
+      font-size: 18px;
       float: left;
       padding-left: 10px;
-      font-size: 18px;
+    }
+
+    span:last-child {
+
+      float: right;
+      padding-right: 10px;
+      transform: rotate(180deg);
     }
   }
 
@@ -65,6 +73,7 @@
       justify-content: flex-start;
       text-align: left;
       margin-top: 10px;
+
       .info {
         display: inline-block;
         padding: 10px 15px;

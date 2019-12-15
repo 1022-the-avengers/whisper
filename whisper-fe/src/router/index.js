@@ -13,6 +13,8 @@ const ShowFriend = () => import('../views/showfriend/showfriend.vue')    //展�
 const Register = () => import('../views/register/register.vue')
 const Chat = () => import('../views/chat/chat.vue')
 
+const ModifyInfo = () => import('../views/modifyinfo/modifyinfo.vue')    //修改个人信息页面 
+
 export default new Router({
   routes: [
     {
@@ -42,6 +44,11 @@ export default new Router({
       path: '/chat',
       name: Chat,
       component: Chat
+    },
+    {
+      path:'/main/modify',
+      name:ModifyInfo,
+      component:ModifyInfo
     }
   ]
 })

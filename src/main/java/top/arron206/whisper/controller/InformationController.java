@@ -47,8 +47,8 @@ public class InformationController {
     @RequestMapping(value = "/informations", method = RequestMethod.GET)
     public GeneralResponse getInformations(@RequestParam(name = "nickname", required = false) String nickname,
                                           @RequestParam(name = "gender", required = false) String gender,
-                                          @RequestParam(name = "minAge", required = false) int minAge,
-                                          @RequestParam(name = "maxAge", required = false) int maxAge) {
+                                          @RequestParam(name = "minAge", required = false) Integer minAge,
+                                          @RequestParam(name = "maxAge", required = false) Integer maxAge) {
         List<UserInformation> userInformations =  userInformationService.getUserInformations(nickname, gender, minAge, maxAge);
         return new GeneralResponse("用户资料请求成功", userInformations,
                 "",

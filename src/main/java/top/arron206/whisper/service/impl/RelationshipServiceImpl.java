@@ -49,6 +49,8 @@ public class RelationshipServiceImpl implements RelationshipService {
         User custom = new User(customId);
         Friendship friendshipInDB = this.friendshipRepository.findByCustomAndAndHost(custom, host);
         this.friendshipRepository.delete(friendshipInDB);
+        friendshipInDB = this.friendshipRepository.findByCustomAndAndHost(host, custom);
+        this.friendshipRepository.delete(friendshipInDB);
     }
 
     public Map<String, List<UserInformation>> getRelationShips() {

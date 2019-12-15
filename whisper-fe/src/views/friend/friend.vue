@@ -7,7 +7,7 @@
         <span>新的朋友</span>
         <img slot="icon" src="/assets/friend/new_friend.png" width="28" height="28" />
       </mt-cell>
-      <mt-cell>
+      <mt-cell to="/main/modify">
         <span>我的账号</span>
         <img slot="icon" src="/assets/friend/tag.png" width="28" height="28" />
       </mt-cell>
