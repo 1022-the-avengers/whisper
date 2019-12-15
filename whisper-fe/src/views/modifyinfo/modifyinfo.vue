@@ -16,6 +16,9 @@
     <div class="but">
       <mt-button type="primary" size="normal" @click="modify">修改信息</mt-button>
     </div>
+    <div class="but">
+      <mt-button type="danger" size="normal" @click="logout">退出登录</mt-button>
+    </div>
     <div class="tag">
       <div class="tag-title">印象</div>
       <div class="tag-items">
@@ -62,6 +65,11 @@ export default {
         .catch(err => {
           console.log(err); //异常
         });
+    },
+    logout() {
+      localStorage.clear();
+      sessionStorage.clear();
+      this.$router.push({ path: "/" });
     },
     getImg(event) {
       var file = document.getElementsByClassName("imgFile")[0];
