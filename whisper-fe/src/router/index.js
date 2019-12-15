@@ -45,7 +45,7 @@ export default new Router({
     },
     {
       path: '/chat',
-      name: Chat,
+      name: 'Chat',
       component: Chat
     },
     {

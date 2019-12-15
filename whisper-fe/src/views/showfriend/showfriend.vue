@@ -27,7 +27,7 @@
           >{{value}}</div>
         </div>
       </div>
-      <mt-button size="large" type="primary">发送消息</mt-button>
+      <mt-button size="large" type="primary" @click="sendMes">发送消息</mt-button>
     </div>
     <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
   </div>
@@ -146,6 +146,15 @@ export default {
         .catch(err => {
           // console.log("删除取消");
         });
+    },
+    sendMes(event){
+      var message ={};
+      message.nickname = this.info.nickname;
+      message.pic = this.info.pic;
+      this.$router.push({
+        name: "Chat",
+        params: { recipientId:this.info.id, message:message}
+      });
     }
   },
   created: function() {
