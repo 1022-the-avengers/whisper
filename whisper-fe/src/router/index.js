@@ -14,6 +14,9 @@ const Register = () => import('../views/register/register.vue')
 const Chat = () => import('../views/chat/chat.vue')
 
 const ModifyInfo = () => import('../views/modifyinfo/modifyinfo.vue')    //修改个人信息页面 
+const ConfirmAdd = () => import('../views/confirmadd/confirmadd.vue')    //发送好友请求页面 
+const TestFriend = () => import('../views/testfriend/testfriend.vue')    //确认好友请求
+
 
 export default new Router({
   routes: [
@@ -49,6 +52,16 @@ export default new Router({
       path:'/main/modify',
       name:ModifyInfo,
       component:ModifyInfo
+    },
+    {
+      path:'/main/confirm',
+      name:ConfirmAdd,
+      component:ConfirmAdd
+    },
+    {
+      path:'/main/testfriend',
+      name:TestFriend,
+      component:TestFriend
     }
   ]
 })

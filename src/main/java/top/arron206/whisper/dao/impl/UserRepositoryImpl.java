@@ -18,6 +18,8 @@ public class UserRepositoryImpl implements UserSearch {
         String sql = "SELECT * FROM user WHERE (nickname like ?) and (gender like ?) and (age>?) and (age<?)";
         if (nickname == null)
             nickname = "%";
+        else
+            nickname = "%" + nickname + "%";
         if (gender == null)
             gender = "%";
         if (minAge == null)
