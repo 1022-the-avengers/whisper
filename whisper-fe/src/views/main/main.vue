@@ -4,11 +4,6 @@
       <mt-tab-container class="page-tabbar-container" v-model="selected">
         <mt-tab-container-item id="chatbox">
           <mt-cell>
-            <chatbox @func="getID"></chatbox>
-          </mt-cell>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="message">
-          <mt-cell>
             <chatbox></chatbox>
           </mt-cell>
         </mt-tab-container-item>       
