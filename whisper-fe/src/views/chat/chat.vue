@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header">
       <span @click="goBack" class="iconfont">&#xe61b;</span>
-      这是哈士奇
+      {{nickName}}
       <span @click="deleteHistory" class="iconfont">&#xe83f;</span>
       <span @click="download" class="iconfont">&#xe64d;</span>
     </div>
@@ -63,7 +63,8 @@ export default {
       myPic: window.localStorage.getItem("userPic"),
       hisPic: window.localStorage.getItem("hisPic"),
       userId: window.localStorage.getItem("userId"),
-      recipientId: ""
+      recipientId: "",
+      nickName: '',
     };
   },
   methods: {
@@ -192,7 +193,7 @@ export default {
     );
     // this.hisPic = this.$route.params.message.pic
     this.recipientId = this.$route.params.recipientId;
-    console.log("this.recipientId", this.recipientId);
+    this.nickName = this.$route.params.message.nickName
     window.localStorage.setItem("hisPic", this.$route.params.message.pic);
   },
   mounted() {
