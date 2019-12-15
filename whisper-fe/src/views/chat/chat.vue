@@ -3,7 +3,8 @@
     <div class="header">
       <span @click="goBack" class="iconfont">&#xe61b;</span>
       这是哈士奇
-      <span @click="download" class="iconfont">&#xe61b;</span>
+      <span @click="deleteHistory" class="iconfont">&#xe83f;</span>
+      <span @click="download" class="iconfont">&#xe64d;</span>
     </div>
     <div class="content">
       <div v-for="(item, index) in historyMessages" :key="index">
@@ -161,6 +162,24 @@ export default {
         aTag.click();
         URL.revokeObjectURL(blob);
       });
+    },
+    deleteHistory() {
+      this.axios
+        .delete("/verification/message/history", {
+          params: {
+            customer: this.recipientId
+          }
+        })
+        .then(
+          function(params) {
+            alert("删除成功");
+            this.$router.go(-1);
+          }.bind(this)
+        )
+        .catch((err) => {
+          alert('删除失败', err)
+          console.log('删除失败', err)
+        });
     }
   },
   created() {
