@@ -11,11 +11,13 @@
           <div class="msg">
             <span class="info">{{item.my}}</span>
           </div>
-          <img class="avator" alt="你的头像" src="http://img.flura.cn/myAvatar.jpg" />
+          <!-- <img class="avator" alt="你的头像" src="http://img.flura.cn/myAvatar.jpg" /> -->
+          <img class="avator" alt="你的头像" :src="myPic" />
         </div>
 
         <div class="content_response" v-else>
-          <img class="avator" alt="他的头像" src="http://img.flura.cn/robot.jpg" />
+          <!-- <img class="avator" alt="他的头像" src="http://img.flura.cn/robot.jpg" /> -->
+          <img class="avator" alt="他的头像" :src="hisPic" />
           <div class="msg">
             <span class="info">{{item.he}}</span>
           </div>
@@ -26,11 +28,13 @@
           <div class="msg">
             <span class="info">{{item.my}}</span>
           </div>
-          <img class="avator" alt="你的头像" src="http://img.flura.cn/myAvatar.jpg" />
+          <!-- <img class="avator" alt="你的头像" src="http://img.flura.cn/myAvatar.jpg" /> -->
+          <img class="avator" alt="你的头像" :src="myPic" />
         </div>
 
         <div class="content_response" v-else>
-          <img class="avator" alt="他的头像" src="http://img.flura.cn/robot.jpg" />
+          <!-- <img class="avator" alt="他的头像" src="http://img.flura.cn/robot.jpg" /> -->
+          <img class="avator" alt="他的头像" :src="hisPic" />
           <div class="msg">
             <span class="info">{{item.he}}</span>
           </div>
@@ -54,10 +58,65 @@ export default {
         { my: "这是一条历史消息" },
         { he: "这别人发过来的历史消息" }
       ],
-      Messages: [{ my: "这是发给某人的一条消息" }, { my: "这是另一个" }]
+      Messages: [{ my: "这是发给某人的一条消息" }, { my: "这是另一个" }],
+      myPic: window.localStorage.getItem("userPic"),
+      hisPic: window.localStorage.getItem("hisPic"),
+      userId: window.localStorage.getItem("userId"),
+      recipientId: ""
     };
   },
   methods: {
+    connection() {
+      // 建立连接对象
+      let scoket = new this.SockJS("http://192.168.1.105:8080/chat"); //连接服务端提供的通信接口，连接以后才可以订阅广播消息和个人消息
+      // 获取STOMP子协议的客户端对象
+      this.stompClient = this.Stomp.over(scoket);
+      // 定义客户端的认证信息,按需求配置
+      var headers = {
+        // additional header
+        userId: this.userId
+      };
+      // 向服务器发起websocket连接
+      this.stompClient.connect(
+        headers,
+        frame => {
+          this.stompClient.subscribe(`/subscription/${this.userId}`, msg => {
+            console.log("返回信息: ", msg);
+            console.log(JSON.parse(msg.body));
+            if (
+              JSON.parse(msg.body).content.he !== "发送成功" &&
+              JSON.parse(msg.body).content.he !== undefined
+            ) {
+              this.Messages.push(JSON.parse(msg.body).content);
+            }
+            // 订阅服务端提供的某个topic  // msg.body存放的是服务端发送给我们的信息
+          });
+        },
+        err => {
+          // 连接发生错误时的处理函数
+          console.log(err);
+        }
+      );
+    },
+    disconnect() {
+      if (this.stompClient != null) {
+        this.stompClient.disconnect();
+        console.log("Disconnected");
+      }
+    },
+    initWebSocket() {
+      this.connection();
+      let self = this;
+      // 断开重连机制,尝试发送消息,捕获异常发生时重连
+      this.timer = setInterval(() => {
+        try {
+          self.stompClient.send("test");
+        } catch (err) {
+          console.log("断线了: " + err);
+          self.connection();
+        }
+      }, 5000);
+    },
     sendMessage() {
       console.log("发送");
       if (this.inputMessage) {
@@ -68,8 +127,8 @@ export default {
           {},
           JSON.stringify({
             content: { my: this.inputMessage },
-            senderId: 3,
-            recipientId: 6
+            senderId: this.userId,
+            recipientId: this.recipientId
           })
         );
         console.log("inputMessage: ", this.inputMessage);
@@ -79,7 +138,7 @@ export default {
     getHistory() {
       this.axios("/verification/message/history", {
         params: {
-          customer: 3, // 和B的聊天记录 customer:B的id
+          customer: this.recipientId, // 和B的聊天记录 customer:B的id
           page: -1
         }
       }).then(res => {
@@ -92,7 +151,7 @@ export default {
     download() {
       this.axios("/verification/message/history/download", {
         params: {
-          customer: 3
+          customer: this.recipientId
         }
       }).then(res => {
         let aTag = document.createElement("a");
@@ -104,11 +163,28 @@ export default {
       });
     }
   },
+  created() {
+    this.initWebSocket();
+    console.log(
+      "this.$route.params.recipientId: ",
+      this.$route.params.recipientId,
+      "this.$route.params.message:  ",
+      this.$route.params.message
+    );
+    // this.hisPic = this.$route.params.message.pic
+    this.recipientId = this.$route.params.recipientId;
+    console.log("this.recipientId", this.recipientId);
+    window.localStorage.setItem("hisPic", this.$route.params.message.pic);
+  },
   mounted() {
     // 请求聊天记录
     this.getHistory();
   },
-
+  beforeDestroy() {
+    // 页面离开时断开连接,清除定时器
+    this.disconnect();
+    clearInterval(this.timer);
+  }
 };
 </script>
 
