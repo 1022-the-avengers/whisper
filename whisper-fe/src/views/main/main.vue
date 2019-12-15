@@ -61,7 +61,6 @@ export default {
     if (!sessionStorage.getItem("MainPage")) {
       //初始化，判断主页面是消息，还是好友
       sessionStorage.setItem("MainPage", "chatbox");
-      
     }
     this.selected = sessionStorage.getItem("MainPage");
 
