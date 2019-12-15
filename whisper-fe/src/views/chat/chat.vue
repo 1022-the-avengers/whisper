@@ -145,6 +145,11 @@ export default {
       });
     },
     goBack() {
+      this.axios("/verification/message/unread", {
+        params: {
+          customer: this.recipientId
+        }
+      })
       this.$router.go(-1);
     },
     download() {
