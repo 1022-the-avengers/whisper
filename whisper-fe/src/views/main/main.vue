@@ -9,7 +9,7 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="message">
           <mt-cell>
-            <chat></chat>
+            <chatbox></chatbox>
           </mt-cell>
         </mt-tab-container-item>       
         <mt-tab-container-item id="friend">

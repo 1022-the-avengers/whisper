@@ -36,7 +36,9 @@ export default {
   },
   methods: {
     handleClick(id) {
-      this.$emit("func", id);
+      // this.$emit("func", id);
+      console.log('点击了')
+      this.$router.push({ name: 'Chat', params: {recipientId: 6} })
     },
     handleGetMessages(res) {
       if (res) {
@@ -125,6 +127,14 @@ export default {
       gender: null,
       age: null
     };
+
+    this.axios('/verification/message/index', {
+      params: {
+        customer: -1
+      }
+    }).then(function (res) {
+      console.log('消息盒子获取未读信息: ', res)
+    })
   },
   mounted() {
     this.initWebSocket();
