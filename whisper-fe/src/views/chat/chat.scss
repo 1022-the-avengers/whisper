@@ -21,12 +21,13 @@
       float: left;
       padding-left: 10px;
     }
-
-    span:last-child {
-
+    span:nth-last-child(2) {
       float: right;
       padding-right: 10px;
-      transform: rotate(180deg);
+    }
+    span:last-child {
+      float: right;
+      padding-right: 10px;
     }
   }
 
