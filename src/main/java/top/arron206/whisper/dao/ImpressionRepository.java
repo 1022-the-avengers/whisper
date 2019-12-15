@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ImpressionRepository extends JpaRepository<Impression, Integer> {
     List<Impression> findByCommenterAndTarget(User Commenter, User Target);
+
+    List<Impression> findByTarget(User Target);
 }

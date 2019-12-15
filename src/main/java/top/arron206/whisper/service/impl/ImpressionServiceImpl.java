@@ -25,11 +25,31 @@ public class ImpressionServiceImpl implements ImpressionService {
     public void saveImpression(ImpressionMessage impressionMessage) {
         userService.setUser();
         User commenter = userService.getUser();
-        User target = new User(impressionMessage.getTargetId());
-        List<Impression> preImpressions = this.impressionRepository.findByCommenterAndTarget(commenter, target);
-        this.impressionRepository.deleteAll(preImpressions);
-        for (String content : impressionMessage.getContents()) {
-            this.impressionRepository.save(new Impression(content, commenter, target));
+        if (commenter.getId() != impressionMessage.getTargetId()) {
+            //清空对别人的好友印象。
+            User target = new User(impressionMessage.getTargetId());
+            List<Impression> preImpressions = this.impressionRepository.findByCommenterAndTarget(commenter, target);
+            this.impressionRepository.deleteAll(preImpressions);
+            for (String content : impressionMessage.getContents()) {
+                this.impressionRepository.save(new Impression(content, commenter, target));
+            }
+        }
+        else {
+            //清空自己的好友印象。
+            List<Impression> preImpressions = this.impressionRepository.findByTarget(commenter);
+            this.impressionRepository.deleteAll(preImpressions);
+            boolean hasAdd = false;
+            for (String content : impressionMessage.getContents()) {
+                for (Impression preImpression : preImpressions) {
+                    if (preImpression.getContent().equals(content)) {
+                        this.impressionRepository.save(new Impression(content, commenter, preImpression.getTarget()));
+                        hasAdd = true;
+                        break;
+                    }
+                }
+                if (!hasAdd)
+                    this.impressionRepository.save(new Impression(content, commenter, commenter));
+            }
         }
     }
 
