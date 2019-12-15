@@ -1,0 +1,22 @@
+.pic{
+    width: 80px;
+    height:80px;
+    margin: 20px auto;
+    border-radius: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 0 10px #26a2ff;
+}
+
+.field{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.but{
+    margin: 20px auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

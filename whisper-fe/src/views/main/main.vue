@@ -22,8 +22,8 @@
 
     <mt-tabbar v-model="selected">
       <mt-tab-item id="chatbox">
-        <img slot="icon" v-show="selected!=='message'" src="/assets/message.png" />
-        <img slot="icon" v-show="selected=='message'" src="/assets/message_click.png" />
+        <img slot="icon" v-show="selected!=='chatbox'" src="/assets/message.png" />
+        <img slot="icon" v-show="selected=='chatbox'" src="/assets/message_click.png" />
         消息
       </mt-tab-item>
       <mt-tab-item id="friend">
@@ -49,8 +49,6 @@ export default {
   },
   methods: {
     getID(data) {
-      console.log(data);
-      this.selected = "message";
       this.id = data;
     }
   },
