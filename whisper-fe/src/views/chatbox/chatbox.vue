@@ -1,9 +1,6 @@
 <template>
   <div class="chatbox-container">
     <mt-header title="消息盒子" />
-    <div class="search-container">
-      <input type="text" v-model="searchValue" />
-    </div>
     <div v-if="unreadMessages">
       <div
         class="message-list-item"
@@ -31,7 +28,6 @@ export default {
   name: "home",
   data() {
     return {
-      searchValue: "",
       selected: "messages-container",
       unreadMessages: {},
       unreadNum: {},

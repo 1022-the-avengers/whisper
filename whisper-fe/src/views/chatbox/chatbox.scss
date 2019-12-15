@@ -1,19 +1,19 @@
 .chatbox-container {
   width: 100vw;
   height: 100%;
-  
+
   .avatar-link {
     display: inline-block;
     position: absolute;
     top: 12px;
     left: 10px;
   }
-  
+
   .avatar-img {
     width: 40px;
     border-radius: 999em;
   }
-  
+
   .title-container {
     display: block;
     font-size: 20px;
@@ -23,16 +23,7 @@
     border-width: 1px 0;
     border: solid gray;
   }
-  
-  
-  .search-container {
-    text-align: center;
-    padding: 5px 0;
-    border-width: 1px 0;
-    border: solid gray;
-    margin-top: -2px;
-  }
-  
+
   .search-container>input {
     width: 70%;
     height: 30px;
@@ -41,44 +32,44 @@
     border-radius: 999em;
     text-align: center;
   }
-  
+
   .message-list-item {
     display: flex;
     align-items: center;
     padding: 5px;
     height: 50px;
   }
-  
-  .message-list-item > .avatar-img {
+
+  .message-list-item>.avatar-img {
     width: 10%;
     max-width: 40px;
     min-width: 30px;
     border: 1px solid gray;
   }
-  
-  .message-list-item > .message-infomation {
+
+  .message-list-item>.message-infomation {
     display: inline-block;
     position: relative;
     height: 100%;
     width: 80%;
     padding: 0 8px;
-    vertical-align:top;
+    vertical-align: top;
   }
-  
-  .message-infomation > .message-username {
+
+  .message-infomation>.message-username {
     position: absolute;
-    top:5px;
+    top: 5px;
     font-size: 0.8rem;
     font-weight: 700;
   }
-  
-  .message-infomation > .message-preview {
+
+  .message-infomation>.message-preview {
     position: absolute;
     bottom: 10px;
     font-size: 0.6rem;
   }
-  
-  .message-infomation > .message-unread {
+
+  .message-infomation>.message-unread {
     position: absolute;
     right: 0;
     bottom: 12px;
@@ -90,8 +81,7 @@
     font-size: 0.7rem;
     color: white;
     opacity: 0.6;
-  
-  }
-  
-}
 
+  }
+
+}
