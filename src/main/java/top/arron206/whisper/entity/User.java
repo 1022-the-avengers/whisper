@@ -49,6 +49,12 @@ public class User {
     @OneToMany(targetEntity = Friendship.class, mappedBy = "custom", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<Friendship> customFriendship;
 
+    @OneToMany(targetEntity = Validation.class, mappedBy = "sender", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    private List<Validation> senderValidations;
+
+    @OneToMany(targetEntity = Validation.class, mappedBy = "receiver", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    private List<Validation> receiverValidations;
+
     public User() { }
 
     public User(int id) {
@@ -162,5 +168,21 @@ public class User {
 
     public void setCustomFriendship(List<Friendship> customFriendship) {
         this.customFriendship = customFriendship;
+    }
+
+    public List<Validation> getSenderValidations() {
+        return senderValidations;
+    }
+
+    public void setSenderValidations(List<Validation> senderValidations) {
+        this.senderValidations = senderValidations;
+    }
+
+    public List<Validation> getReceiverValidations() {
+        return receiverValidations;
+    }
+
+    public void setReceiverValidations(List<Validation> receiverValidations) {
+        this.receiverValidations = receiverValidations;
     }
 }
