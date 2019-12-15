@@ -35,20 +35,22 @@ export default new Router({
     {
       path: '/main/showfriend',
       name: ShowFriend,
-      component: ShowFriend},
-    {  path: '/register',
+      component: ShowFriend
+    },
+    {
+      path: '/register',
       name: Register,
       component: Register
     },
     {
       path: '/chat',
-      name: Chat,
+      name: 'Chat',
       component: Chat
     },
     {
-      path:'/main/modify',
-      name:ModifyInfo,
-      component:ModifyInfo
+      path: '/main/modify',
+      name: ModifyInfo,
+      component: ModifyInfo
     }
   ]
 })
