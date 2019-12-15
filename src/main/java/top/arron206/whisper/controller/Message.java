@@ -11,12 +11,12 @@ import top.arron206.whisper.dto.*;
 import top.arron206.whisper.entity.User;
 import top.arron206.whisper.service.*;
 import top.arron206.whisper.vo.*;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+
 
 @RestController
 @RequestMapping(value = "/verification/message")
@@ -105,15 +105,20 @@ public class Message {
         return ResponseEntity.ok().headers(headers) .contentLength(file.length()).contentType(MediaType.parseMediaType("application/octet-stream")) .body(new FileSystemResource(file));
     }
 
-    @RequestMapping(value = "/history", method = {RequestMethod.PUT})
+    @RequestMapping(value = "/history", method = {RequestMethod.DELETE})
     public StatusMessage readMessage(@RequestParam Integer customer){
         User user = userService.setUser();
         userMessage.readMessage(user.getId(), customer);
+        List<RecordDto> records = recordRepository.getChatRecord(user.getId(), customer, -1);
         LinkMessage linkMessage = new LinkMessage(
                 "",
                 "",
                 "",
                 "");
-        return new StatusMessage("读取成功", linkMessage);
+        if(records.size()==0){
+            return new StatusMessage("删除成功", linkMessage);
+        }
+        recordRepository.deleteRecord(user.getId(), customer);
+        return new StatusMessage("删除成功", linkMessage);
     }
 }
