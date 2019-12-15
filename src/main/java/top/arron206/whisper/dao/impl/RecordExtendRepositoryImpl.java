@@ -24,11 +24,17 @@ public class RecordExtendRepositoryImpl implements RecordExtendRepository {
         BeanPropertyRowMapper<RecordDto> rm = BeanPropertyRowMapper.newInstance(RecordDto.class);
         if(page!=-1) {
             int offset = (page-1)*15;
-            sql = "SELECT * FROM record WHERE (sender_id=? and recipient_id=?) or (sender_id=? and recipient_id=?) order by time desc limit ?,15";
+            sql = "SELECT * FROM record WHERE (sender_id=? and recipient_id=?) or (sender_id=? and recipient_id=?) limit ?,15";
             return jdbcTemplate.query(sql, rm, host, customer, customer, host, offset);
         }else{
-            sql = "SELECT * FROM record WHERE (sender_id=? and recipient_id=?) or (sender_id=? and recipient_id=?) order by time desc";
+            sql = "SELECT * FROM record WHERE (sender_id=? and recipient_id=?) or (sender_id=? and recipient_id=?)";
             return jdbcTemplate.query(sql, rm, host, customer, customer, host);
         }
+    }
+
+    @Override
+    public void deleteRecord(Integer sender, Integer recipient){
+        String sql = "DELETE FROM record WHERE (sender_id = ? AND recipient_id=?) OR (sender_id = ? AND recipient_id = ?) ";
+        jdbcTemplate.update(sql, sender, recipient, recipient, sender);
     }
 }

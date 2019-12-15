@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RecordExtendRepository {
     List<RecordDto> getChatRecord(int host, int customer, int page);
+    void deleteRecord(Integer sender, Integer recipient);
 }
