@@ -42,8 +42,15 @@ export default {
     };
   },
   created: function() {
-    console.log(JSON.parse(sessionStorage.getItem("friends")));
-    this.friends = JSON.parse(sessionStorage.getItem("friends"));
+    this.axios
+      .get("/verification/user/relationships")
+      .then((response) => {
+        this.friends = response.data.data;
+        sessionStorage.setItem("friends",JSON.stringify(response.data.data));
+      })
+      .catch(err => {
+        console.log(error);//异常
+      });
   },
   methods: {}
 };

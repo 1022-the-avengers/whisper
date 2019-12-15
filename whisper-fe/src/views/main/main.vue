@@ -65,14 +65,6 @@ export default {
     }
     this.selected = sessionStorage.getItem("MainPage");
 
-    this.axios
-      .get("/verification/user/relationships")
-      .then((response) => {
-        sessionStorage.setItem("friends",JSON.stringify(response.data.data));
-      })
-      .catch(err => {
-        console.log(error);//异常
-      });
   }
 };
 </script>
