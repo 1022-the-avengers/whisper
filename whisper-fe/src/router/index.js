@@ -5,7 +5,7 @@ Vue.prototype.router = Router
 
 
 const Login = () => import('../views/login/login.vue')    //登录界面
-const Main = () => import('../views/main/main.vue')    //主界面
+const Home = () => import('../views/home/home.vue')    //主界面
 const AddFriend = () => import('../views/addfriend/addfriend.vue')    //添加好友界面
 const ShowFriend = () => import('../views/showfriend/showfriend.vue')    //展示好友信息 
 // const Home = () => import('../views/home/home.vue')
@@ -26,17 +26,17 @@ export default new Router({
       component: Login
     },
     {
-      path: '/main',
-      name: Main,
-      component: Main
+      path: '/home',
+      name:Home,
+      component:Home
     },
     {
-      path: '/main/addfriend',
+      path: '/home/addfriend',
       name: AddFriend,
       component: AddFriend
     },
     {
-      path: '/main/showfriend',
+      path: '/home/showfriend',
       name: ShowFriend,
       component: ShowFriend},
     {  path: '/register',
@@ -49,17 +49,17 @@ export default new Router({
       component: Chat
     },
     {
-      path:'/main/modify',
+      path:'/home/modify',
       name:ModifyInfo,
       component:ModifyInfo
     },
     {
-      path:'/main/confirm',
+      path:'/home/confirm',
       name:ConfirmAdd,
       component:ConfirmAdd
     },
     {
-      path:'/main/testfriend',
+      path:'/home/testfriend',
       name:TestFriend,
       component:TestFriend
     }

@@ -41,7 +41,7 @@
             <input
               type="password"
               name="user_pass"
-              placeholder=" 请输入密码"
+              placeholder=" 请输入密码(长度大于八位)"
               required="true"
               title="请输入密码"
               v-model="password"

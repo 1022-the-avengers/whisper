@@ -1,7 +1,7 @@
 <template>
   <div class="show">
     <mt-header title="好友信息">
-      <router-link to="/main/addfriend" slot="left">
+      <router-link to="/home/addfriend" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -49,11 +49,11 @@ export default {
         .then(response => {
           console.log(response.data);
             MessageBox.alert("请求已发送").then(action => {
-                this.$router.push({ path: "/main/addfriend" });
+                this.$router.push({ path: "/home/addfriend" });
             });
         })
         .catch(err => {
-          MessageBox.alert("不能重复发送请求").then(action => {});
+          MessageBox.alert("不能重复添加，或者添加自己").then(action => {});
         });
     }
   },

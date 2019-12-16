@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header title="添加好友">
-      <router-link to="/main" slot="left">
+      <router-link to="/home" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -86,7 +86,7 @@ export default {
     setFri(key){
       console.log(this.users[key]);
       localStorage.setItem("addfri",JSON.stringify(this.users[key]));
-      this.$router.push("/main/confirm");
+      this.$router.push("/home/confirm");
     }
   }
 };

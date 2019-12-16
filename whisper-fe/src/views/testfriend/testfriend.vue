@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header title="验证好友">
-      <router-link to="/main" slot="left">
+      <router-link to="home" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>

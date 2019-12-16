@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header title="修改个人信息">
-      <router-link to="/main" slot="left">
+      <router-link to="/home" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     modify(event) {
+      var regPos = /^\d+$/;
       if (
         this.info.nickname == "" ||
         this.info.account == "" ||
@@ -53,6 +54,12 @@ export default {
         this.info.gender == ""
       ) {
         MessageBox.alert("所填项不能为空").then(action => {});
+        return false;
+      }else if(this.info.gender!="男" && this.info.gender !="女"){
+        MessageBox.alert("性别只能为男或女").then(action => {});
+        return false;
+      }else if(!regPos.test(this.info.age)){
+        MessageBox.alert("年龄只能为非负整数").then(action => {});
         return false;
       }
       console.log(this.info);

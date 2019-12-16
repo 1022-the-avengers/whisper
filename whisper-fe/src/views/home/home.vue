@@ -35,7 +35,7 @@ import Friend from "../friend/friend.vue";
 import Chat from "../chat/chat.vue";
 import Chatbox from "../chatbox/chatbox.vue";
 export default {
-  name: "main",
+  name: "home",
   data() {
     return {
       selected: "chatbox",
@@ -69,5 +69,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./main.scss";
+@import "./home.scss";
 </style>

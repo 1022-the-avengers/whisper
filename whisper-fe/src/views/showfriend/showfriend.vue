@@ -1,7 +1,7 @@
 <template>
   <div class="show">
     <mt-header title="好友信息">
-      <router-link to="/main" slot="left">
+      <router-link to="/home" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
       <mt-button icon="more" slot="right" @click.native="actionSheet"></mt-button>
@@ -70,7 +70,7 @@ export default {
             .then(response => {
               if (response.data.message == "好友关系解除成功") {
                 MessageBox.alert("好友关系解除成功").then(action => {
-                  this.$router.push({ path: "/main" });
+                  this.$router.push({ path: "/home" });
                 });
               }
             })
