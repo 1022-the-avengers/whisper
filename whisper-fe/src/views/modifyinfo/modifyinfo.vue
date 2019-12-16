@@ -40,7 +40,9 @@ export default {
   name: "modifyinfo",
   data() {
     return {
-      info: {},
+      info: {
+        pic:"/assets/friend/whitebg.png"
+      },
       impressions: []
     };
   },
@@ -73,7 +75,7 @@ export default {
           console.log(err); //异常
         });
     },
-    logout() {
+    logout(event) {
       localStorage.clear();
       sessionStorage.clear();
       this.$router.push({ path: "/" });

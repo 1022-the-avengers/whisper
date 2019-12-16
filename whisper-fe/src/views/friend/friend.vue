@@ -1,6 +1,6 @@
 <template>
   <div class="fri">
-    <mt-header title="link聊天" />
+    <mt-header title="link聊天"/>
 
     <div>
       <mt-cell to="/home/addfriend">
