@@ -57,9 +57,12 @@ export default {
     }
   },
   mounted() {
-    setInterval(() => {
+    this.polling = setInterval(() => {
       this.getMessages();
     }, 2000);
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   }
 };
 </script>
