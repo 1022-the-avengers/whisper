@@ -19,10 +19,14 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    button {
+        width: 80vw;
+    }
 }
 
 .tag{
     width:100vw;
+    box-sizing: border-box;
     height:150px;
     background-color: #fff;
     border: 1px solid #999;

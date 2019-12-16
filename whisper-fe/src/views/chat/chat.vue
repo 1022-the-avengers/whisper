@@ -67,7 +67,7 @@ export default {
   methods: {
     connection() {
       // 建立连接对象
-      let scoket = new this.SockJS("http://192.168.1.105:8080/chat"); //连接服务端提供的通信接口，连接以后才可以订阅广播消息和个人消息
+      let scoket = new this.SockJS("http://192.168.43.85:8080/chat"); //连接服务端提供的通信接口，连接以后才可以订阅广播消息和个人消息
       // 获取STOMP子协议的客户端对象
       this.stompClient = this.Stomp.over(scoket);
       // 定义客户端的认证信息,按需求配置
@@ -145,6 +145,11 @@ export default {
       });
     },
     goBack() {
+      this.axios("/verification/message/unread", {
+        params: {
+          customer: this.recipientId
+        }
+      })
       this.$router.go(-1);
     },
     download() {
