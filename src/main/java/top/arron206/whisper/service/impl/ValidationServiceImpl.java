@@ -35,7 +35,8 @@ public class ValidationServiceImpl implements ValidationService {
         User receiver = new User(validationMessage.getId());
         if (relationshipService.isFriend(sender, receiver) ||
                 validationMessageRepository.findBySenderAndReceiverAndStatus(sender, receiver, 1) != null ||
-                validationMessageRepository.findBySenderAndReceiverAndStatus(receiver, sender, 1) != null)
+                validationMessageRepository.findBySenderAndReceiverAndStatus(receiver, sender, 1) != null ||
+                (sender.getId() == validationMessage.getId()))
             return false;
         else {
             Validation validation = new Validation(sender, receiver, validationMessage.getContent(), 1);
