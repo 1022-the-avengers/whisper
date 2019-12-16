@@ -59,7 +59,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.getMessages();
-    }, 5000);
+    }, 2000);
   }
 };
 </script>

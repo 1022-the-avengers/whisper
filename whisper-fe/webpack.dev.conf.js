@@ -7,6 +7,7 @@ module.exports = merge(baseConfig, {
   devServer: {
     contentBase: './dist',
     port: 8088,
-    hot: true 
+    hot: true,
+    host:"0.0.0.0"
   }
 });
