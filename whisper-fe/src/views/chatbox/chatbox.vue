@@ -56,6 +56,9 @@ export default {
       window.localStorage.setItem("userPic", this.userMessage.pic);
     }
   },
+  created() {
+    this.getMessages();
+  },
   mounted() {
     this.polling = setInterval(() => {
       this.getMessages();
