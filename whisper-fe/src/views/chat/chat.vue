@@ -58,7 +58,7 @@ export default {
       historyMessages: [],
       Messages: [],
       myPic: window.localStorage.getItem("userPic"),
-      hisPic: window.localStorage.getItem("hisPic"),
+      hisPic: '',
       userId: window.localStorage.getItem("userId"),
       recipientId: "",
       nickName: '',
@@ -193,11 +193,11 @@ export default {
       "this.$route.params.message:  ",
       this.$route.params.message
     );
-    // this.hisPic = this.$route.params.message.pic
+    this.hisPic = this.$route.params.message.pic
     this.recipientId = this.$route.params.recipientId;
     this.nickName = this.$route.params.message.nickname
     console.log('this.nickName : ', this.nickName )
-    window.localStorage.setItem("hisPic", this.$route.params.message.pic);
+    // window.localStorage.setItem("hisPic", this.$route.params.message.pic);
   },
   mounted() {
     // 请求聊天记录
