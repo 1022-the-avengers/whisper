@@ -38,8 +38,8 @@ public class ImpressionServiceImpl implements ImpressionService {
             //清空自己的好友印象。
             List<Impression> preImpressions = this.impressionRepository.findByTarget(commenter);
             this.impressionRepository.deleteAll(preImpressions);
-            boolean hasAdd = false;
             for (String content : impressionMessage.getContents()) {
+                boolean hasAdd = false;
                 for (Impression preImpression : preImpressions) {
                     if (preImpression.getContent().equals(content)) {
                         this.impressionRepository.save(new Impression(content, commenter, preImpression.getTarget()));

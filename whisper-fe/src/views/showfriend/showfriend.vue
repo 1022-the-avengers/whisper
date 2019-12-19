@@ -88,9 +88,14 @@ export default {
       })
         .then(({ value, action }) => {
           var add = {};
-          this.info.impressions.push(value);
           add.targetId = this.info.id;
           add.contents = this.info.impressions;
+          const impressions = new Set(add.contents);
+          if(!impressions.has(value)){
+            this.info.impressions.push(value);
+          }
+          console.log(impressions);
+          add.contents = [...impressions.values()];
           console.log(add);
           this.axios
             .post("/verification/user/impression", add)
@@ -151,6 +156,7 @@ export default {
       var message ={};
       message.nickname = this.info.nickname;
       message.pic = this.info.pic;
+      console.log(message);
       this.$router.push({
         name: "Chat",
         params: { recipientId:this.info.id, message:message}
@@ -161,7 +167,6 @@ export default {
     let group = this.$route.query.group;
     let id = this.$route.query.id;
     this.info = JSON.parse(sessionStorage.getItem("friends"))[group][id]; //根据url中地址获取用户信息
-    console.log(this.info);
   }
 };
 </script>

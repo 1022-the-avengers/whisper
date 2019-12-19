@@ -93,9 +93,9 @@ export default {
       ) {
         MessageBox.alert("请选择图片文件").then(action => {});
         return false;
-      } else if (img.size > 1024 * 1024) {
+      } else if (img.size > 1024 * 30) {
         console.log(img.size);
-        MessageBox.alert("选择小于1M的图片").then(action => {});
+        MessageBox.alert("选择小于30kb的图片").then(action => {});
         return false;
       }
       var image = new Image();
