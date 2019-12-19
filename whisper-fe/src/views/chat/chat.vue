@@ -6,7 +6,7 @@
       <span @click="deleteHistory" class="iconfont">&#xe83f;</span>
       <span @click="download" class="iconfont">&#xe64d;</span>
     </div>
-    <div class="content">
+    <div class="content" id="cont">
       <div v-for="(item, index) in historyMessages" :key="index">
         <div class="content_item" v-if="item.my">
           <div class="msg">
@@ -58,10 +58,10 @@ export default {
       historyMessages: [],
       Messages: [],
       myPic: window.localStorage.getItem("userPic"),
-      hisPic: '',
+      hisPic: "",
       userId: window.localStorage.getItem("userId"),
       recipientId: "",
-      nickName: '',
+      nickName: ""
     };
   },
   methods: {
@@ -132,8 +132,11 @@ export default {
         );
         console.log("inputMessage: ", this.inputMessage);
         this.inputMessage = "";
+        setTimeout(() => {
+          this.scrollButtom();
+        }, 0);
       } else {
-        alert('发送内容不能为空或发送内容过长')
+        alert("发送内容不能为空或发送内容过长");
       }
     },
     getHistory() {
@@ -151,7 +154,7 @@ export default {
         params: {
           customer: this.recipientId
         }
-      })
+      });
       this.$router.go(-1);
     },
     download() {
@@ -168,6 +171,10 @@ export default {
         URL.revokeObjectURL(blob);
       });
     },
+    scrollButtom() {
+      let cont = document.getElementById("cont");
+      cont.scrollTop = cont.scrollHeight;
+    },
     deleteHistory() {
       this.axios
         .delete("/verification/message/history", {
@@ -181,9 +188,9 @@ export default {
             this.$router.go(-1);
           }.bind(this)
         )
-        .catch((err) => {
-          alert('删除失败', err)
-          console.log('删除失败', err)
+        .catch(err => {
+          alert("删除失败", err);
+          console.log("删除失败", err);
         });
     }
   },
@@ -195,10 +202,10 @@ export default {
       "this.$route.params.message:  ",
       this.$route.params.message
     );
-    this.hisPic = this.$route.params.message.pic
+    this.hisPic = this.$route.params.message.pic;
     this.recipientId = this.$route.params.recipientId;
-    this.nickName = this.$route.params.message.nickname
-    console.log('this.nickName : ', this.nickName )
+    this.nickName = this.$route.params.message.nickname;
+    console.log("this.nickName : ", this.nickName);
     // window.localStorage.setItem("hisPic", this.$route.params.message.pic);
   },
   mounted() {
