@@ -117,8 +117,8 @@ export default {
       }, 5000);
     },
     sendMessage() {
-      console.log("发送");
-      if (this.inputMessage) {
+      console.log("发送", this.inputMessage.length);
+      if (this.inputMessage && this.inputMessage.length < 200) {
         this.Messages.push({ my: this.inputMessage });
 
         this.stompClient.send(
@@ -132,6 +132,8 @@ export default {
         );
         console.log("inputMessage: ", this.inputMessage);
         this.inputMessage = "";
+      } else {
+        alert('发送内容不能为空或发送内容过长')
       }
     },
     getHistory() {
