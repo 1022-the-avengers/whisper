@@ -30,11 +30,7 @@
     </div>
 
     <div class="users">
-      <mt-cell
-        v-for="(value,key) in users"
-        :key="key"
-        @click.native="setFri(key)"
-      >
+      <mt-cell v-for="(value,key) in users" :key="key" @click.native="setFri(key)">
         <span>{{value.nickname}}</span>
         <img slot="icon" v-bind:src="value.pic" width="28" height="28" />
       </mt-cell>
@@ -43,6 +39,7 @@
 </template>
 
 <script>
+import { MessageBox } from "mint-ui";
 export default {
   name: "addfriend",
   data() {
@@ -74,7 +71,7 @@ export default {
         .then(response => {
           if (response.data.message == "用户资料请求成功") {
             this.users = response.data.data;
-            if(this.users.length==0){
+            if (this.users.length == 0) {
               MessageBox.alert("无符合条件的好友").then(action => {});
             }
           }
@@ -83,9 +80,9 @@ export default {
           console.log(err); //异常
         });
     },
-    setFri(key){
+    setFri(key) {
       console.log(this.users[key]);
-      localStorage.setItem("addfri",JSON.stringify(this.users[key]));
+      localStorage.setItem("addfri", JSON.stringify(this.users[key]));
       this.$router.push("/home/confirm");
     }
   }

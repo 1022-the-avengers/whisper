@@ -1,6 +1,6 @@
 <template>
   <div class="fri">
-    <mt-header title="link聊天"/>
+    <mt-header title="link聊天" />
 
     <div>
       <mt-cell to="/home/addfriend">
@@ -12,7 +12,8 @@
         <img slot="icon" src="/assets/friend/tag.png" width="28" height="28" />
       </mt-cell>
       <mt-cell to="/home/testfriend">
-        <span>朋友验证</span>
+        <mt-badge size="small" type="error" v-show="notReadNum!=0">{{notReadNum}}</mt-badge>
+        <span style="padding-left:5px;">朋友验证</span>
         <img slot="icon" src="/assets/friend/add_friend.png" width="28" height="28" />
       </mt-cell>
     </div>
@@ -38,21 +39,38 @@ export default {
   name: "friend",
   data() {
     return {
-      friends: {}
+      friends: {},
+      notReadNum: 0
     };
   },
   created: function() {
+    var that = this; 
+
     this.axios
       .get("/verification/user/relationships")
-      .then((response) => {
+      .then(response => {
         this.friends = response.data.data;
-        sessionStorage.setItem("friends",JSON.stringify(response.data.data));
+        sessionStorage.setItem("friends", JSON.stringify(response.data.data));
       })
       .catch(err => {
-        console.log(error);//异常
+        console.log(error); //异常
       });
+
+    this.getNotRead = setInterval(function() {    //轮询请求是否有未读消息
+      that.axios
+        .get("/verification/user/validation-amount")
+        .then(response => {
+          that.notReadNum = response.data.data;
+        })
+        .catch(err => {
+          console.log(error); //异常
+        });
+    }, 2000);
   },
-  methods: {}
+  methods: {},
+  beforeDestroy() {
+    clearInterval(this.getNotRead);
+  }
 };
 </script>
 

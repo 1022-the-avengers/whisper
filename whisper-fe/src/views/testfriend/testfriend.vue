@@ -71,6 +71,15 @@ export default {
       .catch(err => {
         console.log(err); //异常
       });
+
+    this.axios    //标记好友请求已读
+      .post("/verification/user/validation-reading")
+      .then(response => {
+      })
+      .catch(err => {
+        console.log(err); //异常
+      });
+    
   }
 };
 </script>
