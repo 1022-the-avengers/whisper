@@ -15,5 +15,9 @@ public interface ValidationService {
 
     void confirmValidation(ValidationMessage validationMessage);
 
+    void readValidation();
+
     Map<String, List<ValidationMessage>> getValidations();
+
+    int getUnprocessedValidationAmount();
 }

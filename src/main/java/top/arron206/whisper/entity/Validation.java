@@ -22,13 +22,16 @@ public class Validation {
     //1处理中，2确认，3拒绝。
     private int status;
 
+    private boolean senderIfRead;
+
     public Validation() {}
 
-    public Validation(User sender, User receiver, String content, int status) {
+    public Validation(User sender, User receiver, String content, int status, boolean senderIfRead) {
         this.sender = sender;
         this.receiver = receiver;
         this.content = content;
         this.status = status;
+        this.senderIfRead = senderIfRead;
     }
 
     public int getId() {
@@ -69,5 +72,13 @@ public class Validation {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public boolean getSenderIfRead() {
+        return senderIfRead;
+    }
+
+    public void setSenderIfRead(boolean senderIfRead) {
+        this.senderIfRead = senderIfRead;
     }
 }

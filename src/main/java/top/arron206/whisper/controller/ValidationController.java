@@ -44,10 +44,30 @@ public class ValidationController {
                 "");
     }
 
+    @RequestMapping(value = "/validation-amount", method = RequestMethod.GET)
+    public GeneralResponse getUnreadValidationAmount() {
+        int unreadValidationAmount = validationService.getUnprocessedValidationAmount();
+        return new GeneralResponse("未读验证消息数量", unreadValidationAmount,
+                "next http://localhost:8080/validation",
+                "http://localhost:8080/validation",
+                "get validation messages",
+                "application/json");
+    }
+
     @RequestMapping(value = "/validation", method = RequestMethod.GET)
     public GeneralResponse getValidations() {
         Map<String, List<ValidationMessage>> validations = this.validationService.getValidations();
         return new GeneralResponse("验证请求列表", validations,
+                "next http://localhost:8080/validation-reading",
+                "http://localhost:8080/validation-reading",
+                "read the processed messages you have send",
+                "application/json");
+    }
+
+    @RequestMapping(value = "/validation-reading", method = RequestMethod.POST)
+    public GeneralResponse readValidationMessage() {
+        validationService.readValidation();
+        return new GeneralResponse("更新未读消息", null,
                 "",
                 "",
                 "",

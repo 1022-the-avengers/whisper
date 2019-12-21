@@ -39,7 +39,8 @@ public class ValidationServiceImpl implements ValidationService {
                 (sender.getId() == validationMessage.getId()))
             return false;
         else {
-            Validation validation = new Validation(sender, receiver, validationMessage.getContent(), 1);
+            //发送方已读先置为true，当接收方处理后设为false，当发送方阅读后再设为true。
+            Validation validation = new Validation(sender, receiver, validationMessage.getContent(), 1, true);
             this.validationMessageRepository.save(validation);
             return true;
         }
@@ -49,6 +50,8 @@ public class ValidationServiceImpl implements ValidationService {
         Validation validation = validationMessageRepository.findById(validationMessage.getId()).get();
         if (validation.getStatus() == 1) {
             validation.setStatus(validationMessage.getStatus());
+            //接收方处理后，发送方设为未读状态。
+            validation.setSenderIfRead(false);
             validationMessageRepository.save(validation);
             if (validationMessage.getStatus() == 2) {
                 //添加好友
@@ -60,6 +63,12 @@ public class ValidationServiceImpl implements ValidationService {
                 friendshipRepository.save(friendship_2);
             }
         }
+    }
+
+    public void readValidation() {
+        userService.setUser();
+        User currentUser = userService.getUser();
+        validationMessageRepository.readMessage(currentUser.getId());
     }
 
     public Map<String, List<ValidationMessage>> getValidations() {
@@ -88,5 +97,12 @@ public class ValidationServiceImpl implements ValidationService {
         }
         map.put("receiver", validationMessages);
         return map;
+    }
+
+    public int getUnprocessedValidationAmount() {
+        userService.setUser();
+        User currentUser = userService.getUser();
+        return validationMessageRepository.
+                countUnprocessedOrUnreadMessage(currentUser.getId());
     }
 }
