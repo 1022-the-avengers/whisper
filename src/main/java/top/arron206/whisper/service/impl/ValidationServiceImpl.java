@@ -13,10 +13,7 @@ import top.arron206.whisper.service.ValidationService;
 import top.arron206.whisper.vo.ValidationMessage;
 
 import javax.validation.ValidationException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ValidationServiceImpl implements ValidationService {
@@ -82,7 +79,9 @@ public class ValidationServiceImpl implements ValidationService {
             validationMessages.add(new ValidationMessage(validation.getId(),
                     validation.getReceiver(),
                     validation.getContent(),
-                    validation.getStatus()));
+                    validation.getStatus(),
+                    validation.getSenderIfRead()));
+        Collections.sort(validationMessages, (ValidationMessage v1, ValidationMessage v2)->v2.getId()-v1.getId());
         map.put("sender", validationMessages);
         //获取当前用户作为接收方时的验证消息。
         validations = currentUser.getReceiverValidations();

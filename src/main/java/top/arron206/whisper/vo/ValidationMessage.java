@@ -9,6 +9,15 @@ public class ValidationMessage {
     private String pic;
     private String content;
     private int status;
+    private boolean ifSenderRead;
+
+    public boolean isIfSenderRead() {
+        return ifSenderRead;
+    }
+
+    public void setIfSenderRead(boolean ifSenderRead) {
+        this.ifSenderRead = ifSenderRead;
+    }
 
     public ValidationMessage() {}
 
@@ -19,6 +28,16 @@ public class ValidationMessage {
         this.pic = user.getPic();
         this.content = content;
         this.status = status;
+    }
+
+    public ValidationMessage(int id, User user, String content, int status, boolean ifSenderRead) {
+        this.id = id;
+        this.account = user.getAccount();
+        this.nickname = user.getNickname();
+        this.pic = user.getPic();
+        this.content = content;
+        this.status = status;
+        this.ifSenderRead = ifSenderRead;
     }
 
     public int getId() {

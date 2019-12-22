@@ -8,13 +8,15 @@
 
     <mt-cell title="发送的请求"></mt-cell>
     <div class="list">
-      <mt-cell :title="value.nickname" v-for="(value,key) in sender" :key="key">  
-        <span>{{value.content}}</span>
+      <mt-cell :title="value.nickname" v-for="(value,key) in sender" :key="key">
+        <mt-badge size="small" type="error" v-show="!value.ifSenderRead">1</mt-badge>
+        <span style="padding-left:5px;">{{value.content}}</span>
         <div class="block"></div>
         <span v-show="value.status==1">处理中</span>
         <span v-show="value.status==2">已同意</span>
         <span v-show="value.status==3">已拒绝</span>
         <img slot="icon" :src="value.pic" width="24" height="24" />
+
       </mt-cell>
     </div>
     <mt-cell title="接收的请求"></mt-cell>
