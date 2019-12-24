@@ -95,7 +95,7 @@ export default {
             this.info.impressions.push(value);
           }
           console.log(impressions);
-          add.contents = [...impressions.values()];
+          add.contents = [...this.info.impressions.values()];
           console.log(add);
           this.axios
             .post("/verification/user/impression", add)

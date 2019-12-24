@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 Vue.prototype.axios = axios
-axios.defaults.baseURL = 'http://192.168.1.107:8080' // 本地测试
+axios.defaults.baseURL = 'http://192.168.2.163:8080' // 本地测试
     // axios.defaults.baseURL = 'http://192.168.43.85:8080'
     // axios.defaults.baseURL = 'http://192.168.2.163:8080'
 
